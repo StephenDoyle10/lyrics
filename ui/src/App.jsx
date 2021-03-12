@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'babel-polyfill';
+import 'whatwg-fetch';
 
 const element = (
     
-        <h1>Hello World!</h1>
+        <h1>Hello world!</h1>
     
 );
 
