@@ -1,6 +1,8 @@
 import React from "react";
-const greetingsData = require("./data.js");
+const initialGreetingsData = require("./data.js");
 
+
+//
 class ASingleGreetingMessage extends React.Component {
   render() {
     const { greeting } = this.props;
@@ -14,12 +16,17 @@ class ASingleGreetingMessage extends React.Component {
   }
 }
 
-const allGreetingMessages = greetingsData.map((i) => (
-  <ASingleGreetingMessage key={i.id} greeting={i} />
-));
+
 
 export default class Greetings extends React.Component {
+    constructor(){
+        super();
+        this.state={ initialGreetingsData }
+    }
   render() {
+    const allGreetingMessages = this.state.initialGreetingsData.map((i) => (
+        <ASingleGreetingMessage key={i.id} greeting={i} />
+      ));
     return (
       <div>
         <h1>Guest book</h1>
