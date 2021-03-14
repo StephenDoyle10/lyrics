@@ -21,8 +21,17 @@ class ASingleGreetingMessage extends React.Component {
 export default class Greetings extends React.Component {
     constructor(){
         super();
-        this.state={ initialGreetingsData }
+        this.state= { initialGreetingsData: []}; 
     }
+
+    componentDidMount(){
+      this.loadData();
+    }
+
+    loadData() {
+      this.setState( {initialGreetingsData: initialGreetingsData})
+    }
+
   render() {
     const allGreetingMessages = this.state.initialGreetingsData.map((i) => (
         <ASingleGreetingMessage key={i.id} greeting={i} />

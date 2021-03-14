@@ -1,3 +1,4 @@
+
 ***Changes from branch 03 to 04a
 Eventually our data will be stored externally on a MongoDB database, and retrieved, updated, etc using GraphQL. But before we get into that, let's see if we can store the data locally in our code and see if we retrieve it and display it from there.
 
