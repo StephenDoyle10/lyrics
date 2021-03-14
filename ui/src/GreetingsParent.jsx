@@ -44,8 +44,11 @@ export default class GreetingsParent extends React.Component {
     return (
       <div>
         <h1>Guest book</h1>
-        <AllGreetingMessages greetingsData={this.state.greetingsData} />
         <GreetingAdd createGreeting={this.createGreeting}/>
+        <br/>
+        <h3>Previous greetings:</h3>
+        <AllGreetingMessages greetingsData={this.state.greetingsData} />
+        
       </div>
     );
   }
