@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'babel-polyfill';
 import 'whatwg-fetch';
-import Greetings from './Greetings.jsx';
+import GreetingsParent from './GreetingsParent.jsx';
 
 const element = (
     
-        <Greetings/>
+        <GreetingsParent/>
     
 );
 
