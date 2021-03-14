@@ -1,0 +1,20 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "#start": "'-e' means program restarts when there are changes to files with this extension. 'server.js' is the file that is launched on start.",
+    "start": "nodemon -e js,graphql server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.21.1",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "nodemon": "^2.0.7"
+  }
+}

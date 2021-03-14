@@ -1,7 +1,7 @@
 import React from "react";
 import GreetingAdd from "./GreetingAdd.jsx";
 import AllGreetingMessages from "./AllGreetingMessages.jsx";
-const initialGreetingsData = require("./data.js");
+
 
 
 
@@ -26,9 +26,21 @@ export default class GreetingsParent extends React.Component {
 
   
 
-  loadData() {
-    this.setState({ greetingsData: initialGreetingsData });
-    
+  async loadData() {
+    const query = `query {
+      greetingList {
+        id name message
+      }
+    }`;
+    const response = await fetch('http://localhost:5000/grahql', {
+      
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({ query })
+    });
+    console.log("yes");
+    const result = await response.json();
+    this.setState({ greetingsData: result.data.greetingList });
   }
   
   createGreeting(greeting) {

@@ -1,0 +1,18 @@
+type Greeting{
+    id:Int!
+    name:String!
+    message:String!
+    
+}
+
+
+##### Top level declarations
+
+type Query{
+    about: String!
+    greetingList: [Greeting!]!
+}
+
+type Mutation {
+    setAboutMessage(message: String!): String
+}

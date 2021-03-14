@@ -1,3 +1,30 @@
+***Changes from branch 06a to 07a
+So far, all our code has been stored in a folder called 'ui'. Ultimately our project's code will actually be divided into two main folders: 'ui' and 'api'. We will be introducing the 'api' folder in this step, as well as GraphQL, which we will be using to make our API calls to MongoDB.
+
+First, we add an api folder in the root director. Ultimately we will be using two servers, one for the ui and one for api related stuff, so we need to create a new package.json file with 'npm init'. Then we need to install the packages 'apollo-server-express', 'express', 'nodemon', and 'graphql'. In the package.json file we change the start script to "start": "nodemon -e js,graphql server.js", so that the server restarts when there are any saved changes, which will save us a bit of time and effort.
+
+We created a file in the api folder called schema.graphql, which details how we can interact with data.
+
+We created a server.js file in the api folder. 
+
+We had to change our loadData function in the ui/src/GreetingsParent.jsx file. Previously this function was merely retrieving data from a local variable, but now we want to retrieve this data with GraphQL. 
+
+
+
+
+***Changes from branch 05a to 06a
+Now that we are comfortable with our file structure, we will set up a form field and deal with event handling so that we can add a greeting to the temporary memory. This addition will not have any persisitence ie will not be saved anywhere, and when the browser closes this entry will be lost (that is why we need external databases like MongoDB, where additions are saved with persistence), but still this is an important step.
+
+All the code additions to achieve this were in GreetingAdd.jsx file in the ui/src folder. We had to:
+
+1. Add a form with two text inputs in the render
+
+2. Add an onSubmit value to this form which tells the program what to do when the submit button is clicked. A function is always passed as this value, in this case the function given as the onSubmit value is handleSubmit, a function we will create now
+
+3. Add a new function called handleSubmit. This function takes the two values that the user has input into the text field, and turns them into an object with two values ('message' and 'name') assigned to a variable named greeting. Then the previously ccreated function 'createGreeting' is called, with the new greeting object passed as an argument. This createGreeting function then adds the new object to our greetingsData, and updates the state of GreetingsParent, and so another greeting is added to our list of displayed greetings on our webpage.
+
+
+
 ***Changes from branch 04a to 05a
 We stored some demo data stored locally in our code to see if we could successfully retireve and display that data on our web page. Now we want to see if we can add to that data through user interaction on the web-page.
 
