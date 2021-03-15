@@ -38,7 +38,6 @@ export default class GreetingsParent extends React.Component {
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({ query })
     });
-    console.log("yes");
     const result = await response.json();
     this.setState({ greetingsData: result.data.greetingList });
   }
