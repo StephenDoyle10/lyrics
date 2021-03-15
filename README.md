@@ -1,13 +1,16 @@
 ***Changes from branch 06a to 07a
+
 So far, all our code has been stored in a folder called 'ui'. Ultimately our project's code will actually be divided into two main folders: 'ui' and 'api'. We will be introducing the 'api' folder in this step, as well as GraphQL, which we will be using to make our API calls to MongoDB.
 
 First, we add an api folder in the root director. Ultimately we will be using two servers, one for the ui and one for api related stuff, so we need to create a new package.json file with 'npm init'. Then we need to install the packages 'apollo-server-express', 'express', 'nodemon', and 'graphql'. In the package.json file we change the start script to "start": "nodemon -e js,graphql server.js", so that the server restarts when there are any saved changes, which will save us a bit of time and effort.
 
 We created a file in the api folder called schema.graphql, which details how we can interact with data.
 
-We created a server.js file in the api folder. 
+We created a server.js file in the api folder. We actually moved our intial greeting data into this file, and deleted our data.js file in our ui/src folder.
 
 We had to change our loadData function in the ui/src/GreetingsParent.jsx file. Previously this function was merely retrieving data from a local variable, but now we want to retrieve this data with GraphQL. 
+
+With both servers running, if you go to localhost:4000 you should see that our new loadData function, now using graphql, has been successful and our intial greetings data has been retrieved and is displayed on the webpage. The next step is to use GraphQL to create a new message that gets added to the data and displayed on the webpage. 
 
 
 
