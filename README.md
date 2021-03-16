@@ -1,10 +1,10 @@
-***Changes from branch 07a to 08a
+***Changes from branch 08a to 09
 
-In the last two branches, the data has been stored locally in our code as variable called greetingsData which contained an array of objects: our data. This is ok for testing purposes but won't ride if the app is deployed. This is because the data has no persistence if it is stored locally - if you make additions to the data through user interaction, the data will be lost once the website is closed and reopened. That is why databases are so important. If data is stored on an external database like the ones hosted on MongoDB it will have persistence, the data will be stored and not lost. In this branch we will move our data over to MongoDB, and delete all instances that are stored within our code as a variable.
+In the last two branches, the data has been stored locally in our code as variable called greetingsData which contained an array of objects: our data. This is ok for testing purposes but won't ride if the app is deployed. This is because the data has no persistence if it is stored locally - if you make additions to the data through user interaction, the data will be lost once the website is closed and reopened. That is why databases are so important. If data is stored on an external database like the ones hosted on MongoDB it will have persistence, the data will be stored and not lost. In this branch we will move our data over to MongoDB, and delete all instances of the data that are stored within our code as a variable.
 
 First we need Mongo installed on our device. We also install mongodb on the api side as an NPM package.
 
-You know the intial greetingsData that we have saved locally within our code? We want to add this code now to MongoDB database, and store it there instead of in our code. The best way to do this is to create a script file. Lets create a script folder in our root directory, and in this folder create a file called initMongo.js. This contains a variable called 'greetingsData' that has a few greetings messages. Then there is a method 'db.greetingMessages.insertMany(greetingsData);' This method instructs the program to insert the data into a collection called greetingsMessages (if there is no such collection with this name, then one will be created). We run the script from the terminal with the command 'mongo GuestBook scripts/initMongo.js'. This instructs the programme to run the script in the GuestBook database (if there is no such database with this name, then one will be created). After running this script, a new database called 'GuestBook' will be created, with a collection called 'greetingMessages', which contains information about three greeting messages.
+You know the intial greetingsData that we have saved locally within our code? We want to add this code now to MongoDB database, and store it there instead of in our code. One way to do this is to create a script file. Lets create a script folder in our root directory, and in this folder create a file called initMongo.js. This contains a variable called 'greetingsData' that has a few greetings messages. After this variable in the file, there is a method 'db.greetingMessages.insertMany(greetingsData);' This method instructs the program to insert the greetingsData into a collection called greetingsMessages (if there is no such collection with this name, then one will be created). We run the script from the terminal with the command 'mongo GuestBook scripts/initMongo.js'. This instructs the programme to run the script in the GuestBook database (if there is no such database with this name, then one will be created). After running this script, a new database called 'GuestBook' will be created, with a collection called 'greetingMessages', which contains information about three greeting messages.
 
 However, currently our app is not retrieving that data, and thus not displaying it. We do that by:
 
@@ -17,9 +17,9 @@ and
 
 3. add a connectToDb function (in api/server.js), which connects to the database
 
-4. changed the setup of the server to first connect with the database and then start the Express application (in api/server.js)
+4. change the setup of the server to first connect with the database and then start the Express application (in api/server.js)
 
-5. made a small change to schema.graphql to the Greeting type, as anytime a new entry is made to a MongoDB collection, an id number is automatically generated. So we add this to to the Greeting type with "_id: ID!"
+5. made a small change to schema.graphql to the Greeting type, as anytime a new entry is made to a MongoDB collection, an id number is automatically generated. So we add this to to the Greeting type with "_id: ID!" Also, reflect this change on the loadData query variable in the GreetingsParent.jsx file by adding _id to the list of fields that are return by the query.
 
 6. also, you can now delete the variable in the server.js where we were keeping our data, as this is now stored and retireved from a MongoDB database.
 
