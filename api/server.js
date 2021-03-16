@@ -1,23 +1,11 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const fs = require('fs');
+const { MongoClient } = require('mongodb');
+
+const url = 'mongodb://localhost/GuestBook';
 
 let aboutMessage = "Guest Book API v1.0";
-
-const greetingsData = [
-    {
-      id: 1,
-      message: `d morning, and in case I don't see ya, good afternoon, good evening and good night!`,
-      name: "Truman Burbank",
-    },
-    {
-      id: 2,
-      message: `Hello, my name is Inigo Montoya. You killed my father. Prepare to die.`,
-      name: "Inigo Montoya",
-    },
-    { id: 3, message: "Hello there", name: "Obi-Wan Kenobi" },
-  ];
-
 
 const resolvers = {
     Query: {
@@ -35,9 +23,17 @@ function setAboutMessage(_, { message }) {
     return aboutMessage = message;
 }
 
-function greetingList(){
+async function greetingList(){
+    const greetingsData = await db.collection('greetingMessages').find({}).toArray();
     return greetingsData;
-}
+    }
+
+async function connectToDb() {
+    const client = new MongoClient(url, { useNewUrlParser: true });
+    await client.connect();
+    console.log('Connected to MongoDB at', url);
+    db = client.db();
+}    
 
 function greetingAdd(_, { greeting }){
     greeting.id = greetingsData.length +1;
@@ -56,6 +52,14 @@ server.applyMiddleware({ app, path: '/graphql' });
 
 const port = 5000;
 
-app.listen(port, function() {
-    console.log(`App started on port ${port}`)
-})
+(async function () {
+    try {
+        await connectToDb();
+    
+            app.listen(port, function() {
+                console.log(`App started on port ${port}`)
+            });
+    } catch (err) {
+        console.log('ERROR:', err);
+    } 
+   })()

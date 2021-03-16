@@ -1,5 +1,32 @@
 ***Changes from branch 07a to 08a
 
+In the last two branches, the data has been stored locally in our code as variable called greetingsData which contained an array of objects: our data. This is ok for testing purposes but won't ride if the app is deployed. This is because the data has no persistence if it is stored locally - if you make additions to the data through user interaction, the data will be lost once the website is closed and reopened. That is why databases are so important. If data is stored on an external database like the ones hosted on MongoDB it will have persistence, the data will be stored and not lost. In this branch we will move our data over to MongoDB, and delete all instances that are stored within our code as a variable.
+
+First we need Mongo installed on our device. We also install mongodb on the api side as an NPM package.
+
+You know the intial greetingsData that we have saved locally within our code? We want to add this code now to MongoDB database, and store it there instead of in our code. The best way to do this is to create a script file. Lets create a script folder in our root directory, and in this folder create a file called initMongo.js. This contains a variable called 'greetingsData' that has a few greetings messages. Then there is a method 'db.greetingMessages.insertMany(greetingsData);' This method instructs the program to insert the data into a collection called greetingsMessages (if there is no such collection with this name, then one will be created). We run the script from the terminal with the command 'mongo GuestBook scripts/initMongo.js'. This instructs the programme to run the script in the GuestBook database (if there is no such database with this name, then one will be created). After running this script, a new database called 'GuestBook' will be created, with a collection called 'greetingMessages', which contains information about three greeting messages.
+
+However, currently our app is not retrieving that data, and thus not displaying it. We do that by:
+
+1. creating two variables in the api/server.js file - 
+'const { MongoClient } = require('mongodb')' 
+and 
+'const url = 'mongodb://localhost/GuestBook''
+
+2. change the greetingList function (in api/server.js)
+
+3. add a connectToDb function (in api/server.js), which connects to the database
+
+4. changed the setup of the server to first connect with the database and then start the Express application (in api/server.js)
+
+5. made a small change to schema.graphql to the Greeting type, as anytime a new entry is made to a MongoDB collection, an id number is automatically generated. So we add this to to the Greeting type with "_id: ID!"
+
+6. also, you can now delete the variable in the server.js where we were keeping our data, as this is now stored and retireved from a MongoDB database.
+
+
+
+***Changes from branch 07a to 08a
+
 In the last branch we used GraphQL to retireve locally stored data, which we then displayed on the webpage (the R(ead) of the CRUD acronym). Now we want to use GraphQL to be able to add to the data (the C(reate) of the CRUD acronym).
 
 We must add a mutation type called greetingAdd to the schema.graphql file. Also, in this file we define what input we are expecting from the user in 'input GreetingInputs{}'.
@@ -27,6 +54,7 @@ With both servers running, if you go to localhost:4000 you should see that our n
 
 
 ***Changes from branch 05a to 06a
+
 Now that we are comfortable with our file structure, we will set up a form field and deal with event handling so that we can add a greeting to the temporary memory. This addition will not have any persisitence ie will not be saved anywhere, and when the browser closes this entry will be lost (that is why we need external databases like MongoDB, where additions are saved with persistence), but still this is an important step.
 
 All the code additions to achieve this were in GreetingAdd.jsx file in the ui/src folder. We had to:
@@ -40,6 +68,7 @@ All the code additions to achieve this were in GreetingAdd.jsx file in the ui/sr
 
 
 ***Changes from branch 04a to 05a
+
 We stored some demo data stored locally in our code to see if we could successfully retireve and display that data on our web page. Now we want to see if we can add to that data through user interaction on the web-page.
 
 Our webpage, by the end of this branch, although already small, can be split into two further parts: one part lists all the existing greeting messages, the other part contains a form to add a new message. We will have a component for each of these parts. The component for listing all existing messages (which we have already achieved in branch 04a) will be handled in the AllGreetingMessages.jsx file, the component for adding a new message will be handled in the GreetingAdd.jsx file. These two files will be siblings and will feed into the GreetingsParent.jsx file, which will contain the state and all the methods that deal with this state. We will change the structure of our project in this manner now, and deal with event handling and user interaction to add data in the next branch.
@@ -47,6 +76,7 @@ Our webpage, by the end of this branch, although already small, can be split int
 
 
 ***Changes from branch 03 to 04a
+
 Eventually our data will be stored externally on a MongoDB database, and retrieved, updated, etc using GraphQL. But before we get into that, let's see if we can store the data locally in our code and see if we retrieve it and display it from there.
 
 We managed this by creating a new file called data.js in the ui/src folder. In this file we created some data for demonstration purposes - three greeting messages. This mimics the type of data we will be getting from users when the web page is up and running and goes live. When we do start getting user messages, we want to know that we'll be able to access and display them properly, and that is the purpose of this dummy data.

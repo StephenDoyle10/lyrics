@@ -15,6 +15,7 @@ type Mutation {
 
 
 type Greeting{
+    _id:ID!
     id:Int!
     name:String!
     message:String!

@@ -17,7 +17,7 @@ export default class GreetingsParent extends React.Component {
   async loadData() {
     const query = `query {
       greetingList {
-        id name message
+        _id id name message
       }
     }`;
     const response = await fetch('http://localhost:5000/graphql', {
