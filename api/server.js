@@ -23,9 +23,11 @@ const resolvers = {
     Query: {
         about: () => aboutMessage,
         greetingList,
+        
     },
     Mutation: {
         setAboutMessage,
+        greetingAdd,
     },
 };
 
@@ -37,6 +39,12 @@ function greetingList(){
     return greetingsData;
 }
 
+function greetingAdd(_, { greeting }){
+    greeting.id = greetingsData.length +1;
+    greetingsData.push(greeting);
+    return greeting
+}
+
 const server = new ApolloServer({
     typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'),
     resolvers,
@@ -44,7 +52,7 @@ const server = new ApolloServer({
 
 const app = express();
 
-server.applyMiddleware({ app, path: '/grahql' });
+server.applyMiddleware({ app, path: '/graphql' });
 
 const port = 5000;
 

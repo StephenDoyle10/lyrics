@@ -1,3 +1,14 @@
+***Changes from branch 07a to 08a
+
+In the last branch we used GraphQL to retireve locally stored data, which we then displayed on the webpage (the R(ead) of the CRUD acronym). Now we want to use GraphQL to be able to add to the data (the C(reate) of the CRUD acronym).
+
+We must add a mutation type called greetingAdd to the schema.graphql file. Also, in this file we define what input we are expecting from the user in 'input GreetingInputs{}'.
+
+We must add a function in the api server.js file called greetingAdd(), that takes as an argument an object, which contains the values of 'message' and 'name' input by the user. A unique id is automatically generated and added to the object. Then the object is pushed to the existing data: our array of greeting messages.
+
+Then we have to completely overhaul our createGreeting function in our GreetingsParent.jsx file, so that it uses GraphQL to add a new message to the data.
+
+
 ***Changes from branch 06a to 07a
 
 So far, all our code has been stored in a folder called 'ui'. Ultimately our project's code will actually be divided into two main folders: 'ui' and 'api'. We will be introducing the 'api' folder in this step, as well as GraphQL, which we will be using to make our API calls to MongoDB.
