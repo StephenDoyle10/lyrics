@@ -1,3 +1,13 @@
+***Changes from branch 09 to 10
+
+So we can successfully retrieve/ read the data from a MongoDB database, and render it to the screen. That takes care of the R(ead) from the CRUD acronym. If we just do the C(reate), U(pdate/ edit), and D(elete), then we have completed our mission of creating a minimal MERN stack project that has full CRUD capabilities. In this step we will concentrate on the C(reate) part of the acronym.
+
+To this end, all we had to do was makes a couple of changes to the greetingAdd function in api/server.js file.
+
+Now we have C(reate) and R(ead) capabilities!
+
+
+
 ***Changes from branch 08a to 09
 
 In the last two branches, the data has been stored locally in our code as variable called greetingsData which contained an array of objects: our data. This is ok for testing purposes but won't ride if the app is deployed. This is because the data has no persistence if it is stored locally - if you make additions to the data through user interaction, the data will be lost once the website is closed and reopened. That is why databases are so important. If data is stored on an external database like the ones hosted on MongoDB it will have persistence, the data will be stored and not lost. In this branch we will move our data over to MongoDB, and delete all instances of the data that are stored within our code as a variable.

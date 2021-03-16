@@ -35,10 +35,15 @@ async function connectToDb() {
     db = client.db();
 }    
 
-function greetingAdd(_, { greeting }){
-    greeting.id = greetingsData.length +1;
-    greetingsData.push(greeting);
-    return greeting
+async function greetingAdd(_, { greeting }){
+    greeting.id = await db.collection('greetingMessages').count()+1;
+    await db.collection('greetingMessages').insertOne(greeting);
+    {/* alternative code:
+        
+    const result = await db.collection('greetingMessages').insertOne(greeting);
+    const savedGreeting = await db.collection('greetingMessages').findOne({ _id: result.insertedId })
+    return savedGreeting
+    */}
 }
 
 const server = new ApolloServer({
