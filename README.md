@@ -1,3 +1,10 @@
+***Changes from branch 10 to 11
+We have Create and Read capabilities, now we just need Update and Delete capabilities and we have reached our goal. In this step we set up the formating and architecture to get ready for Update and Delete functionality.
+
+We add an edit and delete button below each greeting message. The delete button doesn't do anything for now, we will deal with that in a later branch. The edit button, when clicked, opens up two new input fields on the screen that contain the existing message and name as values. The user can click into these input fields and change these values - ie edit/ update the data. There is a submit button under these fields so that when the user is happy with their editing they can click submit and their changes will be updated to the database. However, like the delete button, this submit button doesn't do anything yet. We will save that for a later branch.
+
+
+
 ***Changes from branch 09 to 10
 
 So we can successfully retrieve/ read the data from a MongoDB database, and render it to the screen. That takes care of the R(ead) from the CRUD acronym. If we just do the C(reate), U(pdate/ edit), and D(elete), then we have completed our mission of creating a minimal MERN stack project that has full CRUD capabilities. In this step we will concentrate on the C(reate) part of the acronym.

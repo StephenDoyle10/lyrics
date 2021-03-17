@@ -19,7 +19,10 @@ const count = db.greetingMessages.count();
 print('Inserted', count, 'greetings messages');
 
 /*
-Recap on using mongo shell:
+To run this script (which will refresh all data and get rid of changes):
+In terminal type - mongo GuestBook scripts/initMongo.js
+
+Recap on using mongo shell: 
 1. In command line type mongo and click 'enter'. You are now in mongo shell.
 2. type 'show dbs' to see all mongo databases on your device. If you have run this script you should see a database called GuestBook.
 3. type 'use GuestBook' to move into that database.
