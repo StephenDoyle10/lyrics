@@ -1,3 +1,21 @@
+***Changes from branch 11 to 12
+
+In this branch we will add Updating functionality to our app so that users can edit/update their greeting messages, and their changes will be stored to the MongoDB and replace their existing messages.
+
+For this we have to:
+
+1. Add an input type in the schema called GreetingUpdateInputs
+
+2. Add a greetingUpdate to the mutation list in the schema
+
+3. create a function in api/server.js called greetingUpdate
+
+4. in the same file, add this function to the resolvers variable
+
+At this point, you can test if this is working in localhost:5000/playground.
+
+
+
 ***Changes from branch 10 to 11
 
 We have Create and Read capabilities, now we just need Update and Delete capabilities and we have reached our goal. In this step we set up the formating and architecture to get ready for Update and Delete functionality.

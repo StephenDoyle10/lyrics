@@ -9,6 +9,7 @@ type Query{
 type Mutation {
     setAboutMessage(message: String!): String
     greetingAdd(greeting: GreetingInputs!): Greeting!
+    greetingUpdate(id:Int!, changes: GreetingInputs!): Greeting!
 
 }
 #### end of top level declarations

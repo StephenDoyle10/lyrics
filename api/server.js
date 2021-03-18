@@ -16,6 +16,7 @@ const resolvers = {
     Mutation: {
         setAboutMessage,
         greetingAdd,
+        greetingUpdate,
     },
 };
 
@@ -44,6 +45,13 @@ async function greetingAdd(_, { greeting }){
     const savedGreeting = await db.collection('greetingMessages').findOne({ _id: result.insertedId })
     return savedGreeting
     */}
+}
+
+async function greetingUpdate(_, { id, changes }){
+    
+    await db.collection('greetingMessages').updateOne({id},{$set:changes})
+    const savedGreeting = await db.collection('greetingMessages').findOne({id});
+    return savedGreeting
 }
 
 const server = new ApolloServer({
