@@ -56,7 +56,7 @@ class ASingleGreetingMessage extends React.Component {
           <button onClick={this.toggleEditForm}>Edit</button>
         )}
 
-        <button>Delete</button>
+        <button type="button">Delete</button>
 
         <br />
         {this.state.inputLinkClicked ? (
