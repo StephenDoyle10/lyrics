@@ -50,6 +50,8 @@ async function greetingAdd(_, { greeting }){
 async function greetingUpdate(_, { id, changes }){
     
     await db.collection('greetingMessages').updateOne({id},{$set:changes})
+    
+    
     const savedGreeting = await db.collection('greetingMessages').findOne({id});
     return savedGreeting
 }

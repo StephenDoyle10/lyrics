@@ -4,15 +4,21 @@ In this branch we will add Updating functionality to our app so that users can e
 
 For this we have to:
 
-1. Add an input type in the schema called GreetingUpdateInputs
+1. Add a greetingUpdate to the mutation list in the schema
 
-2. Add a greetingUpdate to the mutation list in the schema
+2. create a function in api/server.js called greetingUpdate
 
-3. create a function in api/server.js called greetingUpdate
+3. in the same file, add this function to the resolvers variable
 
-4. in the same file, add this function to the resolvers variable
+At this point, you can test if this is working in localhost:5000/playground:  mutation greetingUpdate($id:Int!,$changes: GreetingInputs!){
+  greetingUpdate(id: $id, changes:$changes){
+    id name message
+  }
+}
 
-At this point, you can test if this is working in localhost:5000/playground.
+And in query variable box in playground: {"id":2, "changes": { "name": "eddie", "message": "hello"}}
+
+If you click submit after typing this, you should see Entry with id: 2 has been updated.
 
 
 
