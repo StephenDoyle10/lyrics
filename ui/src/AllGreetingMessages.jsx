@@ -46,7 +46,7 @@ class ASingleGreetingMessage extends React.Component {
     return (
       <div>
         <p>
-          {greeting.id}. '{greeting.message}' - {greeting.name}
+          {greeting.id}.'{greeting.message}' - {greeting.name}
         </p>
 
         {/* In this if statement, edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
@@ -94,9 +94,9 @@ class ASingleGreetingMessage extends React.Component {
 
 export default class AllGreetingMessages extends React.Component {
   render() {
-    //console.log(this.props.greetingsData);
+    //key is needed below, when creating a list in the UI from an array with JSX, you should add a key prop to each child and to any of its’ children.
     const allGreetingMessages = this.props.greetingsData.map((i) => (
-      <ASingleGreetingMessage key={i.id} greeting={i} updateGreeting={this.props.updateGreeting}/>
+      <ASingleGreetingMessage key={i._id} greeting={i} updateGreeting={this.props.updateGreeting}/>
     ));
     return <div>{allGreetingMessages}</div>;
   }

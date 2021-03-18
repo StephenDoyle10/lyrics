@@ -1,3 +1,24 @@
+***Changes from branch 13 to 14
+
+All that's left is to be able to delete messages from the UI, and we have a MERN stack project with full CRUD capabilities, albeit a very basic one.
+
+We have to change the same types of thing to the code as when we added an edit api
+
+1. add a greetingDelete to the mutation list in the schema
+
+2. create a function called greetingDelete in api/server.js
+
+3. in the same file, add this function to list of resolvers
+
+At this point, you can test if this is working in localhost:5000/playground:  
+mutation {
+  greetingDelete(id: 4)
+}
+
+If you click submit after typing this, you should see Entry with id: 4 has been deleted.
+
+
+
 ***Changes from branch 12 to 13
 
 Our update works in GraphQL playgroud, now to get it to work from the UI. Like we did when it came to adding a greeting, we will have a handleSubmit function which gathers the data from the forms (when they are submitted) and turns the data into suitable variables. Then those variables are passed as arguments to updateGreeting function, which is very similar to addGreeting function. The handleSubmit function is defined in the ASingleMessage component, while the updateGreeting is defined in the Greetings Parent component and passed down two levels to the ASingleMessage component via props.

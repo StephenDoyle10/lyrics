@@ -17,6 +17,7 @@ const resolvers = {
         setAboutMessage,
         greetingAdd,
         greetingUpdate,
+        greetingDelete
     },
 };
 
@@ -54,6 +55,10 @@ async function greetingUpdate(_, { id, changes }){
     
     const savedGreeting = await db.collection('greetingMessages').findOne({id});
     return savedGreeting
+}
+
+async function greetingDelete(_, { id }){
+    await db.collection('greetingMessages').removeOne({ id })
 }
 
 const server = new ApolloServer({

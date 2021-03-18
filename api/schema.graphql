@@ -10,6 +10,7 @@ type Mutation {
     setAboutMessage(message: String!): String
     greetingAdd(greeting: GreetingInputs!): Greeting!
     greetingUpdate(id:Int!, changes: GreetingInputs!): Greeting!
+    greetingDelete(id: Int!): Boolean
 
 }
 #### end of top level declarations
