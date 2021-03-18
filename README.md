@@ -1,3 +1,9 @@
+***Changes from branch 12 to 13
+
+Out update works in GraphQL playgroud, now to get it to work from the UI. Like we did when it came to adding a greeting, we will have a handleSubmit function which gathers to data from the forms on submit and turns the data into suitable variables. Then those variable are passed as arguments to updateGreeting function, which is very similar to addGreeting function.
+
+
+
 ***Changes from branch 11 to 12
 
 In this branch we will add Updating functionality to our app so that users can edit/update their greeting messages, and their changes will be stored to the MongoDB and replace their existing messages.

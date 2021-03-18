@@ -30,20 +30,36 @@ export default class GreetingsParent extends React.Component {
   }
 
   async createGreeting(greeting) {
-    const query = `mutation {
-      greetingAdd(greeting:{
-        message: "${greeting.message}",
-        name: "${greeting.name}"
-      }){
-        name
+    const query = `mutation greetingAdd($greeting: GreetingInputs!){
+      greetingAdd(greeting: $greeting){
+        id
+      }
+    }`;
+
+    const response = await fetch("http://localhost:5000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query, variables: { greeting } }),
+    });
+    this.loadData();
+  }
+
+  async updateGreeting(id, changes){
+    console.log("updateGreeting function started");
+    console.log(id);
+    console.log(changes);
+    const query = `mutation greetingUpdate($id:Int!,$changes: GreetingInputs!){
+      greetingUpdate(id: $id, changes:$changes){
+        _id id name message
       }
     }`;
     const response = await fetch("http://localhost:5000/graphql", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, variables: { id, changes } }),
     });
-    this.loadData();
+    this.loadData()
+    
   }
 
   render() {
@@ -53,7 +69,7 @@ export default class GreetingsParent extends React.Component {
         <GreetingAdd createGreeting={this.createGreeting} />
         <br />
         <h3>Previous greetings:</h3>
-        <AllGreetingMessages greetingsData={this.state.greetingsData} />
+        <AllGreetingMessages greetingsData={this.state.greetingsData} updateGreeting={this.updateGreeting}/>
       </div>
     );
   }

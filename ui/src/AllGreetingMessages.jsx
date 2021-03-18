@@ -7,9 +7,11 @@ class ASingleGreetingMessage extends React.Component {
     this.state = {
       message: this.props.greeting.message,
       name: this.props.greeting.name,
+      id: this.props.greeting.id,
       inputLinkClicked: false,
     };
     this.toggleEditForm = this.toggleEditForm.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   toggleEditForm() {
@@ -22,6 +24,20 @@ class ASingleGreetingMessage extends React.Component {
         inputLinkClicked: true,
       });
     }
+  }
+  async handleSubmit(e){
+    e.preventDefault();
+    
+    const form = document.forms.greetingEdit;
+    
+    const changes = {
+      message:form.message.value,
+      name:form.name.value
+    }
+    const id = this.state.id;
+    this.props.updateGreeting(id, changes);
+
+
   }
 
   render() {
@@ -42,7 +58,7 @@ class ASingleGreetingMessage extends React.Component {
 
         <br />
         {this.state.inputLinkClicked ? (
-          <form name="greetingEdit">
+          <form name="greetingEdit" onSubmit={this.handleSubmit}>
             <textarea
               type="text"
               name="message"
@@ -60,7 +76,7 @@ class ASingleGreetingMessage extends React.Component {
               size="40"
             />
             <br />
-            <button type="button">Submit changes</button>
+            <button type="submit">Submit changes</button>
             <button type="button" onClick={this.toggleEditForm}>
               Cancel
             </button>
@@ -78,7 +94,7 @@ export default class AllGreetingMessages extends React.Component {
   render() {
     //console.log(this.props.greetingsData);
     const allGreetingMessages = this.props.greetingsData.map((i) => (
-      <ASingleGreetingMessage key={i.id} greeting={i} />
+      <ASingleGreetingMessage key={i.id} greeting={i} updateGreeting={this.props.updateGreeting}/>
     ));
     return <div>{allGreetingMessages}</div>;
   }
