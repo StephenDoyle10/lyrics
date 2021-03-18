@@ -7,6 +7,7 @@ export default class GreetingsParent extends React.Component {
     super();
     this.state = { greetingsData: [] };
     this.createGreeting = this.createGreeting.bind(this);
+    this.updateGreeting = this.updateGreeting.bind(this);
   }
 
   componentDidMount() {
@@ -45,9 +46,6 @@ export default class GreetingsParent extends React.Component {
   }
 
   async updateGreeting(id, changes){
-    console.log("updateGreeting function started");
-    console.log(id);
-    console.log(changes);
     const query = `mutation greetingUpdate($id:Int!,$changes: GreetingInputs!){
       greetingUpdate(id: $id, changes:$changes){
         _id id name message

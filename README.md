@@ -1,6 +1,8 @@
 ***Changes from branch 12 to 13
 
-Out update works in GraphQL playgroud, now to get it to work from the UI. Like we did when it came to adding a greeting, we will have a handleSubmit function which gathers to data from the forms on submit and turns the data into suitable variables. Then those variable are passed as arguments to updateGreeting function, which is very similar to addGreeting function.
+Our update works in GraphQL playgroud, now to get it to work from the UI. Like we did when it came to adding a greeting, we will have a handleSubmit function which gathers the data from the forms (when they are submitted) and turns the data into suitable variables. Then those variables are passed as arguments to updateGreeting function, which is very similar to addGreeting function. The handleSubmit function is defined in the ASingleMessage component, while the updateGreeting is defined in the Greetings Parent component and passed down two levels to the ASingleMessage component via props.
+
+Now onto delete!
 
 
 

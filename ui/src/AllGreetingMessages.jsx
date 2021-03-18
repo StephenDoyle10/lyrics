@@ -7,13 +7,13 @@ class ASingleGreetingMessage extends React.Component {
     this.state = {
       message: this.props.greeting.message,
       name: this.props.greeting.name,
-      id: this.props.greeting.id,
       inputLinkClicked: false,
     };
     this.toggleEditForm = this.toggleEditForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /*toggleEditForm function is necessary as we want the edit forms to be hidden unless a user clicks on the 'edit' button. This component has a state inputLinkClicked. When this is false, edit forms are hidden. When it is true (for example, by clicking on the edit button and activating the toggleEditForm function, inputLinkClicked is set to true, and edit forms are visible.*/
   toggleEditForm() {
     if (this.state.inputLinkClicked) {
       this.setState({
@@ -34,8 +34,9 @@ class ASingleGreetingMessage extends React.Component {
       message:form.message.value,
       name:form.name.value
     }
-    const id = this.state.id;
+    const id = this.props.greeting.id;
     this.props.updateGreeting(id, changes);
+    this.toggleEditForm();
 
 
   }
@@ -48,7 +49,8 @@ class ASingleGreetingMessage extends React.Component {
           {greeting.id}. '{greeting.message}' - {greeting.name}
         </p>
 
-        {this.state.inputLinkClicked ? (
+        {/* In this if statement, edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
+        this.state.inputLinkClicked ? (
           <div></div>
         ) : (
           <button onClick={this.toggleEditForm}>Edit</button>
