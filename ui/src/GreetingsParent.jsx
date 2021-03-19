@@ -8,6 +8,7 @@ export default class GreetingsParent extends React.Component {
     this.state = { greetingsData: [] };
     this.createGreeting = this.createGreeting.bind(this);
     this.updateGreeting = this.updateGreeting.bind(this);
+    this.deleteGreeting = this.deleteGreeting.bind(this);
   }
 
   componentDidMount() {
@@ -60,6 +61,11 @@ export default class GreetingsParent extends React.Component {
     
   }
 
+  async deleteGreeting(id){
+    console.log(id);
+    
+  }
+
   render() {
     return (
       <div>
@@ -67,7 +73,7 @@ export default class GreetingsParent extends React.Component {
         <GreetingAdd createGreeting={this.createGreeting} />
         <br />
         <h3>Previous greetings:</h3>
-        <AllGreetingMessages greetingsData={this.state.greetingsData} updateGreeting={this.updateGreeting}/>
+        <AllGreetingMessages greetingsData={this.state.greetingsData} updateGreeting={this.updateGreeting} deleteGreeting={this.deleteGreeting}/>
       </div>
     );
   }

@@ -7,6 +7,8 @@ const url = 'mongodb://localhost/GuestBook';
 
 let aboutMessage = "Guest Book API v1.0";
 
+let count = 4;
+
 const resolvers = {
     Query: {
         about: () => aboutMessage,
@@ -38,7 +40,7 @@ async function connectToDb() {
 }    
 
 async function greetingAdd(_, { greeting }){
-    greeting.id = await db.collection('greetingMessages').count()+1;
+    greeting.id = count;
     await db.collection('greetingMessages').insertOne(greeting);
     {/* alternative code:
         
@@ -46,6 +48,7 @@ async function greetingAdd(_, { greeting }){
     const savedGreeting = await db.collection('greetingMessages').findOne({ _id: result.insertedId })
     return savedGreeting
     */}
+    count++;
 }
 
 async function greetingUpdate(_, { id, changes }){
@@ -58,7 +61,9 @@ async function greetingUpdate(_, { id, changes }){
 }
 
 async function greetingDelete(_, { id }){
-    await db.collection('greetingMessages').removeOne({ id })
+    
+    await db.collection('greetingMessages').deleteOne({ id });
+    return
 }
 
 const server = new ApolloServer({
