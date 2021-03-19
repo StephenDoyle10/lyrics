@@ -62,7 +62,15 @@ export default class GreetingsParent extends React.Component {
   }
 
   async deleteGreeting(id){
-    console.log(id);
+    const query = `mutation greetingDelete($id:Int!){
+      greetingDelete(id: $id)
+    }`;
+    const response = await fetch("http://localhost:5000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query, variables: { id } }),
+    });
+    this.loadData()
     
   }
 

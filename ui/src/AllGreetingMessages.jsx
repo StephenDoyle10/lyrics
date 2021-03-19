@@ -46,7 +46,7 @@ class ASingleGreetingMessage extends React.Component {
     return (
       <div>
         <p>
-          {greeting.id}.'{greeting.message}' - {greeting.name}
+          '{greeting.message}' - {greeting.name}
         </p>
 
         {/* In this if statement, edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
@@ -56,7 +56,7 @@ class ASingleGreetingMessage extends React.Component {
           <button onClick={this.toggleEditForm}>Edit</button>
         )}
 
-        <button type="button" onClick={() => { this.props.deleteGreeting(greeting._id); }}>Delete</button>
+        <button type="button" onClick={() => { this.props.deleteGreeting(greeting.id); }}>Delete</button>
 
         <br />
         {this.state.inputLinkClicked ? (
