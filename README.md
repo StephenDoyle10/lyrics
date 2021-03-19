@@ -1,3 +1,13 @@
+***Changes from branch 14 to 15
+
+The final step - add the delete API created in the previous step to the UI so users can delete posts from the webpage. This will be a similar setup to implementing our edit API to UI. We add a function called deleteGreeting in GreetingsParent.jsx file. We bind this and pass it down to floors to ASingleGreetingMessage. We add a property to the HTML button element: 
+onClick={() => { this.props.deleteGreeting(greeting.id); }
+so when the delete button is clicked, the deleteGreeting function is activated, and, ultimately, the message is deleted, and the data is reloaded so the page is refreshed, and no longer contains the deleted message.
+
+And that's it, we now have a MERN stack project with full CRUD capabilities, striped down to its bare essentials. This would be a solid template and foundation for more ambitious projects.
+
+
+
 ***Changes from branch 13 to 14
 
 All that's left is to be able to delete messages from the UI, and we have a MERN stack project with full CRUD capabilities, albeit a very basic one.
