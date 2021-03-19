@@ -1,3 +1,9 @@
+***Extra features in branch 16:
+
+1. added a function called createUniqueIdForDocument as we needed a way to assign each new document we created a unique id number. We did this by creating a new database called 'counters', that will always have just a single document, called 'greetings'. This document contains a property called current which is number that we have programmed to increase by 1 every time we create a new document in 'greetingMessages' collection. Thus this 'current' number stays unique we can grab it each time we create a new greetMessages document and asign it as that documents id.
+
+
+
 ***Changes from branch 14 to 15
 
 The final step - add the delete API created in the previous step to the UI so users can delete posts from the webpage. This will be a similar setup to implementing our edit API to UI. We add a function called deleteGreeting in GreetingsParent.jsx file. We bind this and pass it down to floors to ASingleGreetingMessage. We add a property to the HTML button element: 
@@ -25,7 +31,7 @@ mutation {
   greetingDelete(id: 4)
 }
 
-If you click submit after typing this, you should see Entry with id: 4 has been deleted.
+If you click submit after typing this, you should see document with id: 4 has been deleted.
 
 
 
@@ -57,7 +63,7 @@ At this point, you can test if this is working in localhost:5000/playground:  mu
 
 And in query variable box in playground: {"id":2, "changes": { "name": "eddie", "message": "hello"}}
 
-If you click submit after typing this, you should see Entry with id: 2 has been updated.
+If you click submit after typing this, you should see document with id: 2 has been updated.
 
 
 
@@ -100,7 +106,7 @@ and
 
 4. change the setup of the server to first connect with the database and then start the Express application (in api/server.js)
 
-5. made a small change to schema.graphql to the Greeting type, as anytime a new entry is made to a MongoDB collection, an id number is automatically generated. So we add this to to the Greeting type with "_id: ID!" Also, reflect this change on the loadData query variable in the GreetingsParent.jsx file by adding _id to the list of fields that are return by the query.
+5. made a small change to schema.graphql to the Greeting type, as anytime a new document is made to a MongoDB collection, an id number is automatically generated. So we add this to to the Greeting type with "_id: ID!" Also, reflect this change on the loadData query variable in the GreetingsParent.jsx file by adding _id to the list of fields that are return by the query.
 
 6. also, you can now delete the variable in the server.js where we were keeping our data, as this is now stored and retireved from a MongoDB database.
 

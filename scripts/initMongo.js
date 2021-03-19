@@ -18,6 +18,9 @@ db.greetingMessages.insertMany(greetingsData);
 const count = db.greetingMessages.count();
 print('Inserted', count, 'greetings messages');
 
+db.counters.remove({ _id: 'greetings' });
+db.counters.insert({ _id: 'greetings', current: count });
+
 /*
 To run this script (which will refresh all data and get rid of changes):
 In terminal type - mongo GuestBook scripts/initMongo.js
