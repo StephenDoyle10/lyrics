@@ -1,13 +1,11 @@
 ##### Top level declarations
 
 type Query{
-    about: String!
     greetingList: [Greeting!]!
     
 }
 
 type Mutation {
-    setAboutMessage(message: String!): String
     greetingAdd(greeting: GreetingInputs!): Greeting!
     greetingUpdate(id:Int!, changes: GreetingInputs!): Greeting!
     greetingDelete(id: Int!): Boolean

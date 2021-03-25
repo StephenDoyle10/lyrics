@@ -2,6 +2,8 @@ import React from "react";
 import GreetingAdd from "./GreetingAdd.jsx";
 import AllGreetingMessages from "./AllGreetingMessages.jsx";
 
+
+
 export default class GreetingsParent extends React.Component {
   constructor() {
     super();
@@ -9,7 +11,10 @@ export default class GreetingsParent extends React.Component {
     this.createGreeting = this.createGreeting.bind(this);
     this.updateGreeting = this.updateGreeting.bind(this);
     this.deleteGreeting = this.deleteGreeting.bind(this);
+    this.uRLEndpoint = "http://localhost:5000/graphql"
   }
+
+  
 
   componentDidMount() {
     this.loadData();
@@ -22,12 +27,15 @@ export default class GreetingsParent extends React.Component {
         _id id name message
       }
     }`;
-    const response = await fetch("http://localhost:5000/graphql", {
+    console.log(JSON.stringify(query));
+    const response = await fetch(this.uRLEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query }),
     });
+    console.log(response);
     const result = await response.json();
+    console.log(result);
     this.setState({ greetingsData: result.data.greetingList });
   }
 
@@ -38,11 +46,12 @@ export default class GreetingsParent extends React.Component {
       }
     }`;
 
-    const response = await fetch("http://localhost:5000/graphql", {
+    const response = await fetch(this.uRLEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, variables: { greeting } }),
     });
+    
     this.loadData();
   }
 
@@ -52,7 +61,7 @@ export default class GreetingsParent extends React.Component {
         _id id name message
       }
     }`;
-    const response = await fetch("http://localhost:5000/graphql", {
+    const response = await fetch(this.uRLEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, variables: { id, changes } }),
@@ -65,7 +74,7 @@ export default class GreetingsParent extends React.Component {
     const query = `mutation greetingDelete($id:Int!){
       greetingDelete(id: $id)
     }`;
-    const response = await fetch("http://localhost:5000/graphql", {
+    const response = await fetch(this.uRLEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, variables: { id } }),

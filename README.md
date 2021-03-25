@@ -1,6 +1,18 @@
-***Extra features in branch 16:
+***Post script, extra features and housekeeping in branch 16:
 
-1. added a function called createUniqueIdForDocument as we needed a way to assign each new document we created a unique id number. We did this by creating a new database called 'counters', that will always have just a single document, called 'greetings'. This document contains a property called current which is number that we have programmed to increase by 1 every time we create a new document in 'greetingMessages' collection. Thus this 'current' number stays unique we can grab it each time we create a new greetMessages document and asign it as that documents id.
+1. added a function called createUniqueIdForDocument as we needed a way to assign each new document we created a unique id number. We did this by creating a new database called 'counters', that will always have just a single document, called 'greetings'. This document contains a property called 'current' which is a number that we have programmed to increase by 1 every time we create a new document in 'greetingMessages' collection. Thus this 'current' number stays unique we can grab it each time we create a new greetMessages document and asign it as that document's id.
+
+2. API folder: up until now, all our JavaScript code on the API side has been in a single file - server.js. Keeping all JS code in one file is typically considered bad practice, especially as the project grows and that file gets bigger and unweildly. Instead, 'separation of concerns' is advised. This is the idea that each module in an app should only be responsible for one thing and should not contain code that deals with other things. Separating concerns reduces code complexity by breaking a large app down into many smalled units. We have already done that on the front-end and split our front-end code into a few different files. Now we will do that on the back-end. Ultimately, our server.js file will become 4 files: server.js, api_handler.js, db.js, and issue.js.
+
+The server.js file sets up the express server and begins listening.
+
+The api_handler.js file deals with the construction of the Apollo server, and the creation of the resolver object.
+
+The db.js file which contains the function for connecting to MongoDB. It also contains the function for creating a unique ID for each document (see above)
+
+The issue.js file has all our resolver functions.
+
+
 
 
 
