@@ -12,6 +12,12 @@ The db.js file which contains the function for connecting to MongoDB. It also co
 
 The issue.js file has all our resolver functions.
 
+Going forward: in this project I have deliberately set out to create as bare bones a project as possible, so it is possible to see essential and necessary code, without distracting extras. However such a barebones project would not be very impressive once deployed. Here are some things that could added to make the project a bit more professional and useful:
+
+1. CSS and bootstrap
+
+2. signup and login features: at the moment our project has full CRUD capabilities. However, without user registration, CRUS capabilities are not very effective, as anyone can visit the website and delete and edit any of the content. If we introduce registration, then only the user who created the content can edit or delete it. 
+
 
 
 
