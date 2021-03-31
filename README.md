@@ -16,7 +16,11 @@ Going forward: in this project I have deliberately set out to create as bare bon
 
 1. CSS and bootstrap
 
-2. signup and login features: at the moment our project has full CRUD capabilities. However, without user registration, CRUS capabilities are not very effective, as anyone can visit the website and delete and edit any of the content. If we introduce registration, then only the user who created the content can edit or delete it. 
+2. signup and login features: at the moment our project has full CRUD capabilities. However, without user registration, CRUS capabilities are not very effective, as anyone can visit the website and delete and edit any of the content. If we introduce registration, then only the user who created the content can edit or delete it.
+
+3. We would want to store our environment variables in a serparate fill called .env, and then install dotenv package so that we can access and use those variables. Some of our code contains things like secret keys and passwords. If we keep such confidential information in a file called .env, and then add that file to a .gitignore file, then our confidential information would not be pushed to github when we commit and push our code.
+
+4. move our MongoDB database to the cloud (with Mongo Atlas) so that we can deploy our app, and so the database is no longer on our local machine
 
 
 
