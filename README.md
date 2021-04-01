@@ -1,3 +1,9 @@
+***Changes from branch 17 to 18
+
+Had to make some changes in order to get app ready for deployment on heroku, for example changing API endpoint for fetch methods, and changing port number
+
+
+
 ***Changes from branch 16 to 17
 
 So far we have been performing CRUD operations on a mongodb database that has been stored locally on our device. When we deploy our app however, these CRUD operations will have to be performed on a mongodb database stored in the cloud. 
