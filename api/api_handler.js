@@ -18,7 +18,6 @@ const server = new ApolloServer({
     typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'),
     resolvers: resolvers,
 })
-console.log(server);
 
 function installHandler(app) {
 server.applyMiddleware({ app, path: '/graphql' });

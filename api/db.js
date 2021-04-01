@@ -1,9 +1,10 @@
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
 
 
 async function connectToDb() {
-    const url = 'mongodb://localhost/GuestBook';
+    const url = process.env.DB_URL;
     const client = new MongoClient(url, { useNewUrlParser: true });
     await client.connect();
     console.log('Connected to MongoDB at', url);
