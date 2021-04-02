@@ -1,3 +1,28 @@
+***Changes from branch 17 to 18
+
+Had to make some changes in order to get app ready for deployment on heroku, for example changing API endpoint for fetch methods, and changing port number
+
+
+
+***Changes from branch 16 to 17
+
+So far we have been performing CRUD operations on a mongodb database that has been stored locally on our device. When we deploy our app however, these CRUD operations will have to be performed on a mongodb database stored in the cloud. 
+
+We can make that change now. For this we will have to sign up with a service such as Mongo Atlas, which is where we can store databases in the cloud. Mongo Atlas is run by the same people behind MongoDB, although there are other alternatives available. From here, you can get a URL that you can use to connect your project to the database. The URL will take the following shape: mongodb+srv://${atlas_account_username}:${atlas_account_password}@cluster0.nimhz.mongodb.net/${database_name} 
+
+Now, in the file api/db.js, we have to edit our connectToDb() function. Look at this line from that functions code: const url = 'mongodb://localhost/GuestBook';
+This means we were connecting to a database stored locally. We have to change this line, and put our URL in there instead, the one that looks something like this: mongodb+srv://${atlas_account_username}:${atlas_account_password}@cluster0.nimhz.mongodb.net/${database_name}
+
+The app should work as usual now, with the difference that our data is stored in the cloud instead of on our machine: an important step if we are to deploy our app.
+
+However, if you want to upload your code publicly to GitHub, this does introduce a new problem: the URL contains your Atlas account password, so it is not a good idea to post this publicly on GitHub. This kind of problem occurs often, as code will often contain confidential information, for example secret API keys.
+
+There is a simple way around this problem though. We can store such confidential data as variables in a separate file called .env, and then we add this file to our .gitignore file. Any files or folders listed in the .gitignore file do NOT get added to the GitHub repo when we push our code to it - as the name suggests, GitHub ignores these files and folders. So lets create a .env file in our api folder, and add this line to it: DB_URL=mongodb+srv://${atlas_account_username}:${atlas_account_password}@cluster0.nimhz.mongodb.net/${database_name}
+
+To access this variable we need a package called dotenv, so run npm install dotenv. Once installed, add the line require('dotenv').config(); to the top of db.js file. Now, to access variables from the .env file, we prefix the variable name used in the .env file with 'process.env.'. So to use DB_URL variable from .env file in the db.js file, we use 'process.env.DB_URL' 
+
+
+
 ***Post script, extra features and housekeeping in branch 16:
 
 1. added a function called createUniqueIdForDocument as we needed a way to assign each new document we created a unique id number. We did this by creating a new database called 'counters', that will always have just a single document, called 'greetings'. This document contains a property called 'current' which is a number that we have programmed to increase by 1 every time we create a new document in 'greetingMessages' collection. Thus this 'current' number stays unique we can grab it each time we create a new greetMessages document and asign it as that document's id.

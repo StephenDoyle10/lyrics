@@ -23,7 +23,11 @@ db.counters.insert({ _id: 'greetings', current: count });
 
 /*
 To run this script (which will refresh all data and get rid of changes):
-In terminal type - mongo GuestBook scripts/initMongo.js
+For using this script in locally-stored db = in terminal type - mongo GuestBook scripts/initMongo.js
+
+For using this script in cloud-based database = in terminal type - mongo $DB-URL scripts/initMongo.js
+
+($DB_URL will look something like this: mongodb+srv://${mongodb_username}:${mongodb_password}@cluster0.nimhz.mongodb.net/${database_name})
 
 Recap on using mongo shell: 
 1. In command line type mongo and click 'enter'. You are now in mongo shell.
