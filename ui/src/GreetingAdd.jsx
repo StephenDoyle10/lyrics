@@ -21,7 +21,7 @@ export default class GreetingAdd extends React.Component {
   render() {
     return (
       <div>
-        <h3>Welcome to the guest book. Please leave a message, whether a joke, a favourite quote or lyric, or just a simple 'hello'!</h3>
+        <h3>Welcome to the guest book! Please leave a message, whether a joke, a favourite quote or lyric, or just a simple 'hello'!</h3>
         {/*onSubmit or onClick take a function as a value, which tells the program what to do when the action is taken:*/}
         <form name="greetingAdd" onSubmit={this.handleSubmit}>
           <textarea
