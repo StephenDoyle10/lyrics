@@ -1,28 +1,33 @@
 ##### Top level declarations
 
 type Query{
-    greetingList: [Greeting!]!
+    lyricpostsList: [LyricPost!]!
     
 }
 
 type Mutation {
-    greetingAdd(greeting: GreetingInputs!): Greeting!
-    greetingUpdate(id:Int!, changes: GreetingInputs!): Greeting!
-    greetingDelete(id: Int!): Boolean
+    lyricPostAdd(lyricPost: LyricPostInputs!): LyricPost!
+    lyricPostUpdate(id:Int!, changes: LyricPostInputs!): LyricPost!
+    lyricPostDelete(id: Int!): Boolean
 
 }
 #### end of top level declarations
 
 
-type Greeting{
+type LyricPost{
     _id:ID!
     id:Int!
-    name:String!
-    message:String!
+    lyric: String!
+    song: String!
+    artist: String!
+    user: String!
 }
 
-input GreetingInputs {
-    message: String!
-    name: String!
+
+input LyricPostInputs {
+    lyric: String!
+    song: String!
+    artist: String!
+    user: String!
 }
 

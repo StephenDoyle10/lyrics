@@ -1,15 +1,16 @@
 const { createUniqueIdForDocument } = require('./db.js');
 
 async function list(){
-    const greetingsData = await db.collection('greetingMessages').find({}).toArray();
-    return greetingsData;
+    const lyricPosts = await db.collection('lyricPosts').find({}).toArray();
+    return lyricPosts;
     }
 
  
 
-async function add(_, { greeting }){
-    greeting.id = await createUniqueIdForDocument('greetings');
-    await db.collection('greetingMessages').insertOne(greeting);
+async function add(_, { lyricPost }){
+    lyricPost.id = await createUniqueIdForDocument('lyrics');
+    await db.collection('lyricPosts').insertOne(lyricPost);
+    return lyricPost
     {/* alternative code:
         
     const result = await db.collection('greetingMessages').insertOne(greeting);
@@ -21,7 +22,7 @@ async function add(_, { greeting }){
 
 async function update(_, { id, changes }){
     
-    await db.collection('greetingMessages').updateOne({id},{$set:changes})
+    await db.collection('lyricPosts').updateOne({id},{$set:changes})
     
     {/*
     const savedGreeting = await db.collection('greetingMessages').findOne({id});
@@ -31,7 +32,7 @@ async function update(_, { id, changes }){
 
 async function remove(_, { id }){
     
-    await db.collection('greetingMessages').deleteOne({ id });
+    await db.collection('lyricPosts').deleteOne({ id });
     {/*return*/}
 }
 

@@ -1,16 +1,16 @@
 const fs = require('fs');
 const { ApolloServer } = require(`apollo-server-express`);
-const issue = require('./issue.js');
+const resFun = require('./resolverFunctions.js');
 
 const resolvers = {
     Query: {
-        greetingList: issue.list
+        lyricpostsList: resFun.list
         
     },
     Mutation: {
-        greetingAdd: issue.add,
-        greetingUpdate: issue.update,
-        greetingDelete: issue.remove,
+        lyricPostAdd: resFun.add,
+        lyricPostUpdate: resFun.update,
+        lyricPostDelete: resFun.remove,
     },
 };
 

@@ -1,12 +1,16 @@
 import React from "react";
 
-class ASingleGreetingMessage extends React.Component {
+class ASingleLyricPost extends React.Component {
+  
   constructor(props) {
     super(props);
+    const { lyric, song, artist, user } = this.props.lyricpost;
 
     this.state = {
-      message: this.props.greeting.message,
-      name: this.props.greeting.name,
+      lyric,
+      song,
+      artist,
+      user,
       inputLinkClicked: false,
     };
     this.toggleEditForm = this.toggleEditForm.bind(this);
@@ -28,25 +32,29 @@ class ASingleGreetingMessage extends React.Component {
   async handleSubmit(e){
     e.preventDefault();
     
-    const form = document.forms.greetingEdit;
+    const form = document.forms.updateLyricPost;
     
     const changes = {
-      message:form.message.value,
-      name:form.name.value
+      lyric:form.lyric.value,
+      song:form.song.value,
+      artist:form.artist.value,
+      user:form.user.value
     }
-    const id = this.props.greeting.id;
-    this.props.updateGreeting(id, changes);
+    const id = this.props.lyricpost.id;
+    this.props.updateLyricPost(id, changes);
     this.toggleEditForm();
 
 
   }
 
   render() {
-    const { greeting } = this.props;
+    const { lyricpost } = this.props;
     return (
       <div>
         <p>
-          '{greeting.message}' - {greeting.name}
+          '{lyricpost.lyric}'<br/>
+          {lyricpost.song} by {lyricpost.artist}<br/>
+          - posted by {lyricpost.user}
         </p>
 
         {/* In this if statement, edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
@@ -56,28 +64,44 @@ class ASingleGreetingMessage extends React.Component {
           <button onClick={this.toggleEditForm}>Edit</button>
         )}
 
-        <button type="button" onClick={() => { this.props.deleteGreeting(greeting.id); }}>Delete</button>
+        <button type="button" onClick={() => { this.props.deleteLyricPost(lyricpost.id); }}>Delete</button>
 
         <br />
         {this.state.inputLinkClicked ? (
-          <form name="greetingEdit" onSubmit={this.handleSubmit}>
+          <form name="updateLyricPost" onSubmit={this.handleSubmit}>
             <textarea
               type="text"
-              name="message"
-              value={this.state.message}
-              onChange={(e) => this.setState({ message: e.target.value })}
+              name="lyric"
+              value={this.state.lyric}
+              onChange={(e) => this.setState({ lyric: e.target.value })}
               rows="4"
               cols="40"
             />
             <br />
             <input
               type="text"
-              name="name"
-              value={this.state.name}
-              onChange={(e) => this.setState({ name: e.target.value })}
+              name="song"
+              value={this.state.song}
+              onChange={(e) => this.setState({ song: e.target.value })}
               size="40"
             />
             <br />
+            <br />
+            <input
+              type="text"
+              name="artist"
+              value={this.state.artist}
+              onChange={(e) => this.setState({ artist: e.target.value })}
+              size="40"
+            />
+            <br />
+            <input
+              type="text"
+              name="user"
+              value={this.state.user}
+              onChange={(e) => this.setState({ user: e.target.value })}
+              size="40"
+            />
             <button type="submit">Submit changes</button>
             <button type="button" onClick={this.toggleEditForm}>
               Cancel
@@ -92,13 +116,13 @@ class ASingleGreetingMessage extends React.Component {
   }
 }
 
-export default class AllGreetingMessages extends React.Component {
+export default class AllLyricPosts extends React.Component {
   render() {
     //key is needed below, when creating a list in the UI from an array with JSX, you should add a key prop to each child and to any of its’ children.
-    const allGreetingMessages = this.props.greetingsData.map((i) => (
-      <ASingleGreetingMessage key={i._id} greeting={i} updateGreeting={this.props.updateGreeting} deleteGreeting={this.props.deleteGreeting}/>
+    const allLyricPosts = this.props.lyricpostsList.map((i) => (
+      <ASingleLyricPost key={i._id} lyricpost={i} updateLyricPost={this.props.updateLyricPost} deleteLyricPost={this.props.deleteLyricPost}/>
     ));
-    return <div>{allGreetingMessages}</div>;
+    return <div>{allLyricPosts}</div>;
   }
 }
 

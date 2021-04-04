@@ -1,25 +1,34 @@
-db.greetingMessages.remove({});
+db.lyricPosts.remove({});
 
-const greetingsData = [
+const initialLyricPosts = [
     {
       id: 1,
-      message: `Good morning, and in case I don't see ya, good afternoon, good evening and good night!`,
-      name: "Truman Burbank",
+      lyric: `I've never included a name/ In a song but I'm changing my ways for you Jonathan`,
+      song: "Real Life",
+      artist:"Joan as a Police Woman",
+      user: "Stephen",
+
     },
     {
       id: 2,
-      message: `Hello, my name is Inigo Montoya. You killed my father. Prepare to die.`,
-      name: "Inigo Montoya",
+      lyric: `You with your dietary restriction/ Said you loved me with a lot of conviction`,
+      song: "French Navy",
+      artist:"Camera Obscura",
+      user: "Stephen",
     },
-    { id: 3, message: "Hello there", name: "General Kenobi" },
+    { id: 3,
+      lyric: `Worked 9 to 5 at Debenhams, rented a flat/ I lasted until my lunch break and then I took off/ There wasn't a moment to lose/ I'd already wasted the morning selling another man shoes`,
+      song: "Civilisation",
+      artist:"Joe Gideon & The Shark",
+      user: "Stephen",},
   ];
 
-db.greetingMessages.insertMany(greetingsData);
-const count = db.greetingMessages.count();
+db.lyricPosts.insertMany(initialLyricPosts);
+const count = db.lyricPosts.count();
 print('Inserted', count, 'greetings messages');
 
-db.counters.remove({ _id: 'greetings' });
-db.counters.insert({ _id: 'greetings', current: count });
+db.counters.remove({ _id: 'lyrics' });
+db.counters.insert({ _id: 'lyrics', current: count });
 
 /*
 To run this script (which will refresh all data and get rid of changes):

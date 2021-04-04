@@ -1,18 +1,20 @@
 import React from "react";
-import GreetingAdd from "./GreetingAdd.jsx";
-import AllGreetingMessages from "./AllGreetingMessages.jsx";
+import LyricPostAdd from "./LyricPostAdd.jsx";
+import AllLyricPosts from "./AllLyricPosts.jsx";
+
 
 
 export default class GreetingsParent extends React.Component {
   constructor() {
     super();
-    this.state = { greetingsData: [] };
-    this.createGreeting = this.createGreeting.bind(this);
-    this.updateGreeting = this.updateGreeting.bind(this);
-    this.deleteGreeting = this.deleteGreeting.bind(this);
-    this.uRLEndpoint = "https://api-stevs-guestbook.herokuapp.com/graphql"
+    this.state = { lyricpostsList: [] };
+    this.createLyricPost = this.createLyricPost.bind(this);
+    this.updateLyricPost = this.updateLyricPost.bind(this);
+    this.deleteLyricPost = this.deleteLyricPost.bind(this);
+    this.uRLEndpoint = "http://localhost:5000/graphql"
   }
 
+  
   
 
   componentDidMount() {
@@ -21,11 +23,9 @@ export default class GreetingsParent extends React.Component {
 
   //about GraphQL queries: A query is sent to the server that precisely describes its data needs. The server resolves that query and returns only the data the client asked for.
   async loadData() {
-    const query = `query {
-      greetingList {
-        _id id name message
-      }
-    }`;
+    const query = `query{lyricpostsList{
+      _id id lyric song artist user
+    }}`;
     const response = await fetch(this.uRLEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -34,29 +34,29 @@ export default class GreetingsParent extends React.Component {
     
     const result = await response.json();
     
-    this.setState({ greetingsData: result.data.greetingList });
+    this.setState({ lyricpostsList: result.data.lyricpostsList });
   }
 
-  async createGreeting(greeting) {
-    const query = `mutation greetingAdd($greeting: GreetingInputs!){
-      greetingAdd(greeting: $greeting){
+  async createLyricPost(lyricPostA) {
+    const query = `mutation ($lyricPostA:LyricPostInputs!){
+      lyricPostAdd(lyricPost:$lyricPostA){
         id
-      }
+    }
     }`;
 
     const response = await fetch(this.uRLEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query, variables: { greeting } }),
+      body: JSON.stringify({ query, variables: { lyricPostA } }),
     });
     
     this.loadData();
   }
 
-  async updateGreeting(id, changes){
-    const query = `mutation greetingUpdate($id:Int!,$changes: GreetingInputs!){
-      greetingUpdate(id: $id, changes:$changes){
-        _id id name message
+  async updateLyricPost(id, changes){
+    const query = `mutation lyricPostUpdate($id:Int!,$changes: LyricPostInputs!){
+      lyricPostUpdate(id: $id, changes:$changes){
+        _id id song
       }
     }`;
     const response = await fetch(this.uRLEndpoint, {
@@ -68,9 +68,9 @@ export default class GreetingsParent extends React.Component {
     
   }
 
-  async deleteGreeting(id){
-    const query = `mutation greetingDelete($id:Int!){
-      greetingDelete(id: $id)
+  async deleteLyricPost(id){
+    const query = `mutation lyricPostDelete($id:Int!){
+      lyricPostDelete(id: $id)
     }`;
     const response = await fetch(this.uRLEndpoint, {
       method: "POST",
@@ -84,11 +84,11 @@ export default class GreetingsParent extends React.Component {
   render() {
     return (
       <div>
-        <h1>Guest book</h1>
-        <GreetingAdd createGreeting={this.createGreeting} />
+        <h1>Lyrics to Live By</h1>
+        <LyricPostAdd createLyricPost={this.createLyricPost} />
         <br />
-        <h3>Previous greetings:</h3>
-        <AllGreetingMessages greetingsData={this.state.greetingsData} updateGreeting={this.updateGreeting} deleteGreeting={this.deleteGreeting}/>
+        <h3>Previous added lyrics:</h3>
+        <AllLyricPosts lyricpostsList={this.state.lyricpostsList} updateLyricPost={this.updateLyricPost} deleteLyricPost={this.deleteLyricPost}/>
       </div>
     );
   }
