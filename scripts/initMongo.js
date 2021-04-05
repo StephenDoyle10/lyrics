@@ -35,6 +35,8 @@ print('Inserted', count, 'greetings messages');
 
 db.counters.remove({ _id: 'lyrics' });
 db.counters.insert({ _id: 'lyrics', current: count });
+db.counters.remove({ _id: 'users' });
+db.counters.insert({ _id: 'users', current: count });
 
 /*
 To run this script (which will refresh all data and get rid of changes):

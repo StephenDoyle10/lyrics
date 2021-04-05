@@ -11,6 +11,7 @@ const resolvers = {
         lyricPostAdd: resFun.add,
         lyricPostUpdate: resFun.update,
         lyricPostDelete: resFun.remove,
+        userAdd:resFun.userAdd,
     },
 };
 

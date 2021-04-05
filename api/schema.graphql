@@ -9,6 +9,7 @@ type Mutation {
     lyricPostAdd(lyricPost: LyricPostInputs!): LyricPost!
     lyricPostUpdate(id:Int!, changes: LyricPostInputs!): LyricPost!
     lyricPostDelete(id: Int!): Boolean
+    userAdd(foo:UserInputs!):User!
 
 }
 #### end of top level declarations
@@ -29,5 +30,17 @@ input LyricPostInputs {
     song: String!
     artist: String!
     user: String!
+}
+
+type User {
+    _id:ID!
+    id:Int!
+    username:String!
+    password:String!
+}
+
+input UserInputs {
+    username:String!
+    password:String!
 }
 

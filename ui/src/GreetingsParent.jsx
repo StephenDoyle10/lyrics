@@ -1,6 +1,8 @@
 import React from "react";
 import LyricPostAdd from "./LyricPostAdd.jsx";
 import AllLyricPosts from "./AllLyricPosts.jsx";
+import Register from "./Register.jsx";
+
 import './App.css';
 
 
@@ -12,6 +14,7 @@ export default class GreetingsParent extends React.Component {
     this.createLyricPost = this.createLyricPost.bind(this);
     this.updateLyricPost = this.updateLyricPost.bind(this);
     this.deleteLyricPost = this.deleteLyricPost.bind(this);
+    this.createUser = this.createUser.bind(this);
     this.uRLEndpoint = "http://localhost:5000/graphql"
   }
 
@@ -82,9 +85,25 @@ export default class GreetingsParent extends React.Component {
     
   }
 
+  async createUser(foo) {
+    const query = `mutation ($foo:UserInputs!){
+      userAdd(foo:$foo){
+        id
+    }
+    }`;
+
+    const response = await fetch(this.uRLEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query, variables: { foo } }),
+    });
+    
+  }
+
   render() {
     return (
       <div>
+        <Register createUser={this.createUser}/>
         <h1>Lyrics to Live By</h1>
         <LyricPostAdd createLyricPost={this.createLyricPost} />
         <br />
