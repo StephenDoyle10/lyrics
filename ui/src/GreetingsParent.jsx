@@ -1,6 +1,7 @@
 import React from "react";
 import LyricPostAdd from "./LyricPostAdd.jsx";
 import AllLyricPosts from "./AllLyricPosts.jsx";
+import './App.css';
 
 
 

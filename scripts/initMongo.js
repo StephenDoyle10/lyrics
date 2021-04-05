@@ -3,7 +3,8 @@ db.lyricPosts.remove({});
 const initialLyricPosts = [
     {
       id: 1,
-      lyric: `I've never included a name/ In a song but I'm changing my ways for you Jonathan`,
+      lyric: `I've never included a name
+In a song but I'm changing my ways for you Jonathan`,
       song: "Real Life",
       artist:"Joan as a Police Woman",
       user: "Stephen",
@@ -11,13 +12,18 @@ const initialLyricPosts = [
     },
     {
       id: 2,
-      lyric: `You with your dietary restriction/ Said you loved me with a lot of conviction`,
+      lyric: 
+      `You with your dietary restriction
+Said you loved me with a lot of conviction`,
       song: "French Navy",
       artist:"Camera Obscura",
       user: "Stephen",
     },
     { id: 3,
-      lyric: `Worked 9 to 5 at Debenhams, rented a flat/ I lasted until my lunch break and then I took off/ There wasn't a moment to lose/ I'd already wasted the morning selling another man shoes`,
+      lyric: `Worked 9 to 5 at Debenhams, rented a flat
+I lasted until my lunch break and then I took off
+There wasn't a moment to lose
+I'd already wasted the morning selling another man shoes`,
       song: "Civilisation",
       artist:"Joe Gideon & The Shark",
       user: "Stephen",},

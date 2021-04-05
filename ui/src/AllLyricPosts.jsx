@@ -51,9 +51,9 @@ class ASingleLyricPost extends React.Component {
     const { lyricpost } = this.props;
     return (
       <div>
-        <p>
-          '{lyricpost.lyric}'<br/>
-          {lyricpost.song} by {lyricpost.artist}<br/>
+        <p className="lyricPostData">
+          '{lyricpost.lyric}'<br/><br/>
+          <span className="songName">{lyricpost.song}</span> by {lyricpost.artist}<br/><br/>
           - posted by {lyricpost.user}
         </p>
 

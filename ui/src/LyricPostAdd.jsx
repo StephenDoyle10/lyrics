@@ -25,7 +25,7 @@ export default class LyricPostAdd extends React.Component {
   render() {
     return (
       <div>
-        <h3>Inspired by some lyrics recently? Share the wealth!</h3>
+        <h3>Been inspired by some lyrics recently? Share the wealth!</h3>
         {/*onSubmit or onClick take a function as a value, which tells the program what to do when the action is taken:*/}
         <form name="lyricPostAdd" onSubmit={this.handleSubmit}>
           <textarea
