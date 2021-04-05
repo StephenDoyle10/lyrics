@@ -8,9 +8,9 @@ On the API side we added a userAdd mutation type to the schema and the resolvers
 
 However, for security reasons, it is bad practice to store the actual password in the database. Rather, the password should be hashed before it is sent to the database. bcrypt is a popular package to help with this. We installed bcrypt and used it in the resolver function to hash the password, and it is a hashed version of the password that is sent to the MongoDB collection.
 
-On the UI side we created a register form in which users can input a username and password (a 'confirm password' input is also included, so that user dosn't make a mistake with the password).
+On the UI side we created a register form on the homepage in which users can input a username and password (a 'confirm password' input is also included, so that user dosn't make a mistake with the password).
 
-
+So with these additions, the user can register an account, although the functionality of the site remains the same, whether the user has an account or not. The next step would be to make the site read-only for people who are just visiting who do not have an account, while people who have logged in can create posts, and edit and delete them.
 
 
 Branch 3:
