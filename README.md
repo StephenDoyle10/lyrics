@@ -1,3 +1,11 @@
+Branch 5:
+
+In this branch we deleted the changes in the previous branch. In that branch, we moved towards authentication and authorization using a username and password. Instead, we will have authentication and authorization using Google APIs, ie allowing a user to sign in with their gmail address and password.
+
+We have come some way towards this (Chapters 14.1- 14.7 in Subramanian book). By this stage, a user can sign in via gmail. If the user is signedin, then they are able to edit and delete posts. If not, edit and delete buttons are hidden.
+
+Next step is to use React Context so that every component is aware if the user is signed in or not, and every component knows which user is signed in. 
+
 Branch 4:
 
 In this branch we started on something very important for full stack projects, especially those that have CRUD capabilities: the ability for users to create an account and signin. Without this, anyone visiting the site can delete or edit anyone elses content, rendering websites with CRUD capabilities essentially useless.
@@ -6,7 +14,7 @@ Adding this feature is a long and involved process. In this branch we set up the
 
 On the API side we added a userAdd mutation type to the schema and the resolvers. With this, when a user inputs a username and password and clicks submit, that data is send to a new MongoDB colelction called 'users'.
 
-However, for security reasons, it is bad practice to store the actual password in the database. Rather, the password should be hashed before it is sent to the database. bcrypt is a popular package to help with this. We installed bcrypt and used it in the resolver function to hash the password, and it is a hashed version of the password that is sent to the MongoDB collection.
+However, for security reasons, it is bad practice to store the actual password in the database. This is because if someone manages to hack/ break into the database, they have access to everyone's passwords. Rather, the password should be hashed before it is sent to the database. bcrypt is a popular package to help with this. We installed bcrypt and used it in the resolver function to hash the password, and it is a hashed version of the password that is sent to the MongoDB collection.
 
 On the UI side we created a register form on the homepage in which users can input a username and password (a 'confirm password' input is also included, so that user dosn't make a mistake with the password).
 
