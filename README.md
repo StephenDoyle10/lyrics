@@ -1,3 +1,11 @@
+App available to visit online here: http://ui.lyricstoliveby.tk
+
+Branch 6: 
+
+In this branch, we introduced React Context API. This was very useful as with this, every component knows the details of the user who is signed in. We can alter the behaviour of the component (usually with 'if statements') depending on if a user is signed in or not, and depending on which user is signe in. For example, if joebloggs@gmail.com is signed in, the lyric post that was created by user joebloggs@gmail.com will have edit and delete posts, whereas posts not created by joebloggs@gmail.com will not have any such buttons (as we do not want this user to be able to edit or delete other peoples posts, only his own).
+
+We also got this app ready for deployment on heroku, and indeed we did deploy on heroku. available here - http://ui.lyricstoliveby.tk 
+
 Branch 5:
 
 In this branch we deleted the changes in the previous branch. In that branch, we moved towards authentication and authorization using a username and password. Instead, we will have authentication and authorization using Google APIs, ie allowing a user to sign in with their gmail address and password.

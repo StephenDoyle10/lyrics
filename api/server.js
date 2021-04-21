@@ -3,57 +3,27 @@ const { connectToDb } = require("./db.js");
 const fs = require("fs");
 const { ApolloServer } = require(`apollo-server-express`);
 const resFun = require("./resolverFunctions.js");
-const cookieParser = require('cookie-parser');
-const auth = require('./auth.js');
-
-
+const cookieParser = require("cookie-parser");
+const auth = require("./auth.js");
 
 require("dotenv").config();
 
 const resolvers = {
-    Query: {
-      lyricpostsList: resFun.list,
-    },
-    Mutation: {
-      lyricPostAdd: resFun.add,
-      lyricPostUpdate: resFun.update,
-      lyricPostDelete: resFun.remove,
-      userAdd: resFun.userAdd,
-    },
-  };
+  Query: {
+    lyricpostsList: resFun.list,
+  },
+  Mutation: {
+    lyricPostAdd: resFun.add,
+    lyricPostUpdate: resFun.update,
+    lyricPostDelete: resFun.remove,
+    userAdd: resFun.userAdd,
+  },
+};
 
 const app = express();
 
 app.use(cookieParser());
-app.use('/auth', auth.routes);
-
-
-
-
-
-/*
-app.use(
-  expressSession({
-    name: 'qid',
-    secret: "keyboard cat",
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-      secure: false,
-      
-      maxAge: 3600000,
-    },
-  })
-);
-*/
-
-
-/*
-function getContext({req}){
-    
-    return req
-}
-*/
+app.use("/auth", auth.routes);
 
 function getContext({ req }) {
   const user = auth.getUser(req);
@@ -66,18 +36,26 @@ const server = new ApolloServer({
   //makes playground interface available on deployed app, which is turned off by default:
   playground: true,
   introspection: true,
-  /*context: ({req})=>
-  console.log(req.headers.authorization),*/
   context: getContext,
-  });
+});
 
 function installHandler(app) {
-  server.applyMiddleware({ app, path: "/graphql" });
+  const enableCors = (process.env.ENABLE_CORS || "true") === "true";
+  console.log("CORS setting:", enableCors);
+  let cors;
+  if (enableCors) {
+    const origin = process.env.UI_SERVER_ORIGIN || "http://localhost:8000";
+    const methods = "POST";
+    cors = { origin, methods, credentials: true };
+  } else {
+    cors = "false";
+  }
+  server.applyMiddleware({ app, path: "/graphql", cors });
 }
 
 installHandler(app);
 
-const port = process.env.API_SERVER_PORT;
+const port = process.env.PORT;
 
 (async function () {
   try {

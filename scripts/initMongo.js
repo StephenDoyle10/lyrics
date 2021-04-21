@@ -8,6 +8,7 @@ In a song but I'm changing my ways for you Jonathan`,
       song: "Real Life",
       artist:"Joan as a Police Woman",
       user: "Stephen",
+      email: "example@gmail.com"
 
     },
     {
@@ -18,6 +19,7 @@ Said you loved me with a lot of conviction`,
       song: "French Navy",
       artist:"Camera Obscura",
       user: "Stephen",
+      email: "example@gmail.com"
     },
     { id: 3,
       lyric: `Worked 9 to 5 at Debenhams, rented a flat
@@ -26,7 +28,8 @@ There wasn't a moment to lose
 I'd already wasted the morning selling another man shoes`,
       song: "Civilisation",
       artist:"Joe Gideon & The Shark",
-      user: "Stephen",},
+      user: "Stephen",
+      email: "example@gmail.com"},
   ];
 
 db.lyricPosts.insertMany(initialLyricPosts);
