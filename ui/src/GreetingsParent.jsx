@@ -23,7 +23,7 @@ export default class GreetingsParent extends React.Component {
 
   async componentDidMount() {
     
-    const apiEndpoint = window.ENV.UI_AUTH_ENDPOINT;
+    const apiEndpoint = this.uRLEndpoint;
     const response = await fetch(`${apiEndpoint}/user`, {
       method: 'POST',
       credentials: 'include',

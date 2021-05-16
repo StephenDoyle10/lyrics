@@ -6,6 +6,8 @@ require('dotenv').config();
 const app = express();
 
 app.use(cookieParser());
+
+
 app.use(express.static('public'));
 
 const apiProxyTarget = process.env.API_PROXY_TARGET;

@@ -4,12 +4,14 @@ import UserContext from "./UserContext.js";
 class ASingleLyricPost extends React.Component {
   constructor(props) {
     super(props);
-    const { lyric, song, artist, user, email } = this.props.lyricpost;
+    const { lyric, song, artist, user:givenName, email } = this.props.lyricpost;
 
     this.state = {
       lyric,
       song,
       artist,
+      givenName,
+      email,
       inputLinkClicked: false,
     };
     this.toggleEditForm = this.toggleEditForm.bind(this);
@@ -32,13 +34,14 @@ class ASingleLyricPost extends React.Component {
     e.preventDefault();
     const user = this.context;
     const form = document.forms.updateLyricPost;
-
+    console.log(this.state.givenName);
+    console.log(this.state.email);
     const changes = {
       lyric: form.lyric.value,
       song: form.song.value,
       artist: form.artist.value,
-      user: user.givenName,
-      email: user.email,
+      user: this.state.givenName,
+      email: this.state.email,
     };
     const id = this.props.lyricpost.id;
     this.props.updateLyricPost(id, changes);
@@ -48,8 +51,9 @@ class ASingleLyricPost extends React.Component {
   render() {
     const { lyricpost } = this.props;
     const user = this.context;
+    const moderatorEmail="spreaddoyle@gmail.com"
 
-    if (user.email == lyricpost.email) {
+    if (user.email == lyricpost.email||user.email==moderatorEmail) {
       return (
         <div>
           <p className="lyricPostData">
@@ -68,7 +72,6 @@ class ASingleLyricPost extends React.Component {
             ) : (
               <button
                 onClick={this.toggleEditForm}
-                hidden={user.email !== lyricpost.email}
               >
                 Edit
               </button>
@@ -80,7 +83,6 @@ class ASingleLyricPost extends React.Component {
             onClick={() => {
               this.props.deleteLyricPost(lyricpost.id);
             }}
-            hidden={user.email !== lyricpost.email}
           >
             Delete
           </button>

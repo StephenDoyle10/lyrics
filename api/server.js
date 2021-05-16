@@ -23,12 +23,15 @@ const resolvers = {
 const app = express();
 
 app.use(cookieParser());
+
 app.use("/auth", auth.routes);
 
 function getContext({ req }) {
   const user = auth.getUser(req);
   return { user };
 }
+
+
 
 const server = new ApolloServer({
   typeDefs: fs.readFileSync("./schema.graphql", "utf-8"),
@@ -44,13 +47,16 @@ function installHandler(app) {
   console.log("CORS setting:", enableCors);
   let cors;
   if (enableCors) {
+    console.log("1");
     const origin = process.env.UI_SERVER_ORIGIN || "http://localhost:8000";
     const methods = "POST";
     cors = { origin, methods, credentials: true };
+    console.log("2");
   } else {
     cors = "false";
   }
   server.applyMiddleware({ app, path: "/graphql", cors });
+  console.log("3");
 }
 
 installHandler(app);
