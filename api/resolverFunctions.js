@@ -10,30 +10,17 @@ async function list(){
 async function add(_, { lyricPost }){
     lyricPost.id = await createUniqueIdForDocument('lyrics');
     await db.collection('lyricPosts').insertOne(lyricPost);
-    return lyricPost
-    {/* alternative code:
-        
-    const result = await db.collection('greetingMessages').insertOne(greeting);
-    const savedGreeting = await db.collection('greetingMessages').findOne({ _id: result.insertedId })
-    return savedGreeting
-    */}
-    
+    return lyricPost   
 }
 
 async function update(_, { id, changes }){
     
     await db.collection('lyricPosts').updateOne({id},{$set:changes})
-    
-    {/*
-    const savedGreeting = await db.collection('greetingMessages').findOne({id});
-    return savedGreeting 
-    */}
 }
 
 async function remove(_, { id }){
     
     await db.collection('lyricPosts').deleteOne({ id });
-    {/*return*/}
 }
 
 module.exports = { list, add, update, remove }

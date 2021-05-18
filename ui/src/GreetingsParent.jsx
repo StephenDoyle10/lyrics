@@ -1,6 +1,7 @@
 import React from "react";
 import LyricPostAdd from "./LyricPostAdd.jsx";
 import AllLyricPosts from "./AllLyricPosts.jsx";
+import Register from "./Register.jsx";
 import './App.css';
 
 
@@ -12,7 +13,7 @@ export default class GreetingsParent extends React.Component {
     this.createLyricPost = this.createLyricPost.bind(this);
     this.updateLyricPost = this.updateLyricPost.bind(this);
     this.deleteLyricPost = this.deleteLyricPost.bind(this);
-    this.uRLEndpoint = "http://localhost:5000/graphql"
+    this.uRLEndpoint = window.ENV.UI_API_ENDPOINT;
   }
 
   
@@ -85,7 +86,8 @@ export default class GreetingsParent extends React.Component {
   render() {
     return (
       <div>
-        <h1>Lyrics to Live By</h1>
+        <h1>Lyrics to Live Byy</h1>
+        <Register/>
         <LyricPostAdd createLyricPost={this.createLyricPost} />
         <br />
         <h3>Previous added lyrics:</h3>

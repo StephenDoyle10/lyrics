@@ -1,3 +1,12 @@
+Branch 4a:
+1. We created a new component called Register.jsx. This contained a signin button. This component contains a user object as state. The user object has two properties, signedIn (either true or false) and givenName (the signed in user's name). If signedIn is 'true' then a welcome message to the user is rendered. If signedIn is 'false' then a sign in button is rendered.
+
+This component was added to GreetingsParent.jsx so that it is displayed at the top of the webpage when loaded.
+
+2. Added UI_API_ENDPOINT and GOGGLE_CLIENT_ID as ui environmental variables, and set up a function in the UI server, so that these variables could be accessed by components.
+
+3. Added a componentDidMount method to Register.jsx which initialises the Goggle library when the component is first used. Then added to the signin function so that user is taken to Google authorization popup when they click signin button, which asks them for their gmail and password. If they sucessfully complete this, they the popup disappears, and instead of the signin button at the top of the page, there is a personalised message welcoming the user.
+
 Branch 3:
 
 Up until now, we have had zero styling in our project and instead have been focusing on backend, APIs, project architecture, and so on. In this branch we connected a CSS stylesheet to the project (although at the moment the stylesheet is largely empty).
