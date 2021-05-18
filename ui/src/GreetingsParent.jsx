@@ -86,7 +86,7 @@ export default class GreetingsParent extends React.Component {
   render() {
     return (
       <div>
-        <h1>Lyrics to Live Byy</h1>
+        <h1>Lyrics to Live By</h1>
         <Register/>
         <LyricPostAdd createLyricPost={this.createLyricPost} />
         <br />

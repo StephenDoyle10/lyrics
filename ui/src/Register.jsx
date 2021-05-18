@@ -11,17 +11,33 @@ export default class Register extends React.Component {
       this.signIn = this.signIn.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const clientId = window.ENV.GOOGLE_CLIENT_ID;
-    
+        if (!clientId) return;
         window.gapi.load("auth2", () => {
           if (!window.gapi.auth2.getAuthInstance()) {
             //this line initialises the Google library, which is needed in the following signin function
-            window.gapi.auth2.init({ client_id: clientId });
-          }
+            window.gapi.auth2.init({ client_id: clientId }).then(() => {
+              this.setState({ disabled: false });
+              });
+            }
+          });
+        await this.loadData();
+      }
+
+      async loadData() {
+        const apiEndpoint = window.ENV.UI_AUTH_ENDPOINT;
+        const response = await fetch(`${apiEndpoint}/user`, {
+          method: 'POST',
         });
+        const body = await response.text();
+        const result = JSON.parse(body);
+        const { signedIn, givenName } = result;
+
+        this.setState({ user: { signedIn, givenName } });
       }
   
+      
       async signIn() {
         let googleToken;
         try {

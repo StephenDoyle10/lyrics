@@ -1,3 +1,17 @@
+Branch 6a: 
+
+JSON Web Tokens
+
+The goal of this branch is to make user signin persist across browser refreshes. We did this using JSON Web Tokens.
+
+On the api side installed cookie-parser and jsonwebtoken.
+
+The biggest changes were made to auth.js, with also some changes made to Register.jsx.
+
+This completes persistence of signin, although now persistence of signing out is an issue! The next branch will sort that out.
+
+
+
 Branch 5a: branch 4a dealt with authentication, this branch deals with authoization.
 1. Installed NPM modules google-auth-library and body-parser on the api side. Created new file auth.js on the api side.
 2. 'Verifying the google token'
