@@ -1,3 +1,7 @@
+Branch 5a: branch 4a dealt with authentication, this branch deals with authoization.
+1. Installed NPM modules google-auth-library and body-parser on the api side. Created new file auth.js on the api side.
+2. 'Verifying the google token'
+
 Branch 4a:
 1. We created a new component called Register.jsx. This contained a signin button. This component contains a user object as state. The user object has two properties, signedIn (either true or false) and givenName (the signed in user's name). If signedIn is 'true' then a welcome message to the user is rendered. If signedIn is 'false' then a sign in button is rendered.
 
