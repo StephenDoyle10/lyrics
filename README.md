@@ -1,3 +1,14 @@
+Branch 7a:
+
+Signing Out + Authorization
+
+1. Signing out now persistent after adding signout api in auth.js, and adding to the signout function in Register.jsx
+
+2. Authorization: created a context in Apollo server which can be passed through to all resolver functions. This context contains information on whether a user is signed in or not. As this context is now passed to resolver functions, we can forbid the functions to be carried out if a user is not signed in. This is a start to implementing authorization throughout our app.
+
+
+
+
 Branch 6a: 
 
 JSON Web Tokens

@@ -1,4 +1,5 @@
 const { createUniqueIdForDocument } = require('./db.js');
+const { mustBeSignedIn } = require('./auth.js');
 
 async function list(){
     const lyricPosts = await db.collection('lyricPosts').find({}).toArray();
@@ -23,4 +24,8 @@ async function remove(_, { id }){
     await db.collection('lyricPosts').deleteOne({ id });
 }
 
-module.exports = { list, add, update, remove }
+module.exports = { 
+    list,
+    add: mustBeSignedIn(add),
+    update: mustBeSignedIn(update),
+    remove: mustBeSignedIn(remove) }

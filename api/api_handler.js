@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { ApolloServer } = require(`apollo-server-express`);
 const resFun = require('./resolverFunctions.js');
+const auth = require('./auth.js');
 
 const resolvers = {
     Query: {
@@ -14,9 +15,15 @@ const resolvers = {
     },
 };
 
+function getContext({ req }) {
+    const user= auth.getUser(req);
+    return { user };
+}
+
 const server = new ApolloServer({
     typeDefs: fs.readFileSync('./schema.graphql', 'utf-8'),
     resolvers: resolvers,
+    context: getContext,
     //makes playground interface available on deployed app, which is turned off by default:
     playground: true,
     introspection: true,
