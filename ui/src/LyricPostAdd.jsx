@@ -23,6 +23,7 @@ export default class LyricPostAdd extends React.Component {
   }
 
   render() {
+    const {user: { signedIn } } = this.props;
     return (
       <div>
         <h3>Been inspired by some lyrics recently? Share the wealth!</h3>
@@ -42,7 +43,7 @@ export default class LyricPostAdd extends React.Component {
           <br/>
           <input type="text" name="user" placeholder="user" />
           <br/>
-          <button>Submit</button>
+          <button hidden={!signedIn}>Submit</button>
         </form>
       </div>
     );

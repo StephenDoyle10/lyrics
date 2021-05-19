@@ -1,3 +1,5 @@
+Branch 8a: Authorization-Aware UI
+
 Branch 7a:
 
 Signing Out + Authorization

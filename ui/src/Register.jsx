@@ -4,37 +4,20 @@ import signInButton from "./images/signinbutton.png";
 export default class Register extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: { signedIn: false, givenName: "" },
-    };
+    
     this.signOut = this.signOut.bind(this);
     this.signIn = this.signIn.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const clientId = window.ENV.GOOGLE_CLIENT_ID;
     if (!clientId) return;
     window.gapi.load("auth2", () => {
       if (!window.gapi.auth2.getAuthInstance()) {
         //this line initialises the Google library, which is needed in the following signin function
-        window.gapi.auth2.init({ client_id: clientId }).then(() => {
-          this.setState({ disabled: false });
-        });
+        window.gapi.auth2.init({ client_id: clientId });
       }
     });
-    await this.loadData();
-  }
-
-  async loadData() {
-    const apiEndpoint = window.ENV.UI_AUTH_ENDPOINT;
-    const response = await fetch(`${apiEndpoint}/user`, {
-      method: "POST",
-    });
-    const body = await response.text();
-    const result = JSON.parse(body);
-    const { signedIn, givenName } = result;
-
-    this.setState({ user: { signedIn, givenName } });
   }
 
   async signIn() {
@@ -57,7 +40,8 @@ export default class Register extends React.Component {
       const result = JSON.parse(body);
       const { signedIn, givenName } = result;
 
-      this.setState({ user: { signedIn, givenName } });
+      const { onUserChange } = this.props;
+      onUserChange({ signedIn, givenName});
     } catch (error) {
       showError(`Error signing into the app: ${error}`);
     }
@@ -72,14 +56,15 @@ export default class Register extends React.Component {
       });
       const auth2 = window.gapi.auth2.getAuthInstance();
       await auth2.signOut();
-      this.setState({ user: { signedIn: false, givenName: "" } });
+      const { onUserChange } = this.props;
+      onUserChange({ signedIn: false, givenName: ""});
     } catch (error) {
       showError(`Error signing out: ${error}`);
     }
   }
 
   render() {
-    const { user } = this.state;
+    const { user } = this.props;
     if (user.signedIn) {
       return (
         <>

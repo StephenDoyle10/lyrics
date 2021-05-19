@@ -9,7 +9,11 @@ import './App.css';
 export default class GreetingsParent extends React.Component {
   constructor() {
     super();
-    this.state = { lyricpostsList: [] };
+    this.state = {
+      lyricpostsList: [],
+      user: { signedIn: false }
+    };
+    this.onUserChange = this.onUserChange.bind(this);
     this.createLyricPost = this.createLyricPost.bind(this);
     this.updateLyricPost = this.updateLyricPost.bind(this);
     this.deleteLyricPost = this.deleteLyricPost.bind(this);
@@ -19,8 +23,21 @@ export default class GreetingsParent extends React.Component {
   
   
 
-  componentDidMount() {
+  async componentDidMount() {
+    
+    const apiEndpoint = window.ENV.UI_AUTH_ENDPOINT;
+    const response = await fetch(`${apiEndpoint}/user`, {
+      method: 'POST',
+    });
+    const body = await response.text();
+    const result = JSON.parse(body);
+    const { signedIn, givenName, email} = result;
+    this.setState({ user: { signedIn, givenName, email} });
     this.loadData();
+  }
+
+  onUserChange(user){
+    this.setState({ user });
   }
 
   //about GraphQL queries: A query is sent to the server that precisely describes its data needs. The server resolves that query and returns only the data the client asked for.
@@ -84,11 +101,12 @@ export default class GreetingsParent extends React.Component {
   }
 
   render() {
+    const { user } = this.state;
     return (
       <div>
         <h1>Lyrics to Live By</h1>
-        <Register/>
-        <LyricPostAdd createLyricPost={this.createLyricPost} />
+        <Register user={user} onUserChange={this.onUserChange}/>
+        <LyricPostAdd user={user} createLyricPost={this.createLyricPost} />
         <br />
         <h3>Previous added lyrics:</h3>
         <AllLyricPosts lyricpostsList={this.state.lyricpostsList} updateLyricPost={this.updateLyricPost} deleteLyricPost={this.deleteLyricPost}/>
