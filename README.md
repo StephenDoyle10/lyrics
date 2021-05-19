@@ -2,6 +2,10 @@ Branch 9a: React Context API
 
 The React Context API can be used to pass properties across the component hierarchy without having to make intermediate components aware of it (unlike the way we made components aware of authorization in the previous branch).
 
+The app now has full authorization procedures. For example, 1. no one can create a post unless they have signed in. 2. users can only edit or delete posts that they themselves have posted, they cannot edit or delete someone elses post.
+
+
+
 Branch 8a: Authorization-Aware UI
 
 Branch 7a:
