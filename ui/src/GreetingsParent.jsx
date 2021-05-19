@@ -26,9 +26,10 @@ export default class GreetingsParent extends React.Component {
 
   async componentDidMount() {
     
-    const apiEndpoint = window.ENV.UI_AUTH_ENDPOINT;
-    const response = await fetch(`${apiEndpoint}/user`, {
+    const apiAuthEndpoint = window.ENV.UI_AUTH_ENDPOINT;
+    const response = await fetch(`${apiAuthEndpoint}/user`, {
       method: 'POST',
+      credentials: 'include',
     });
     const body = await response.text();
     const result = JSON.parse(body);
@@ -48,6 +49,7 @@ export default class GreetingsParent extends React.Component {
     }}`;
     const response = await fetch(this.uRLEndpoint, {
       method: "POST",
+      credentials:'include',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query }),
     });
@@ -65,11 +67,21 @@ export default class GreetingsParent extends React.Component {
 
     const response = await fetch(this.uRLEndpoint, {
       method: "POST",
+      credentials:'include',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, variables: { lyricPostA } }),
     });
-    
-    this.loadData();
+
+
+    const body = await response.text();
+    const result = JSON.parse(body);
+    if (result.errors) {
+      const error = result.errors[0];
+      alert(`${error.extensions.code}: ${error.message}`);
+    }else {
+      this.loadData();
+      alert("Lyric successfully added!");
+    }
   }
 
   async updateLyricPost(id, changes){
@@ -80,6 +92,7 @@ export default class GreetingsParent extends React.Component {
     }`;
     const response = await fetch(this.uRLEndpoint, {
       method: "POST",
+      credentials: 'include',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, variables: { id, changes } }),
     });
@@ -93,6 +106,7 @@ export default class GreetingsParent extends React.Component {
     }`;
     const response = await fetch(this.uRLEndpoint, {
       method: "POST",
+      credentials: 'include',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, variables: { id } }),
     });

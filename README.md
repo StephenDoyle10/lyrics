@@ -1,3 +1,7 @@
+Branch 10a: CORS with credentials
+
+
+
 Branch 9a: React Context API
 
 The React Context API can be used to pass properties across the component hierarchy without having to make intermediate components aware of it (unlike the way we made components aware of authorization in the previous branch).
