@@ -3,6 +3,7 @@ import LyricPostAdd from "./LyricPostAdd.jsx";
 import AllLyricPosts from "./AllLyricPosts.jsx";
 import Register from "./Register.jsx";
 import './App.css';
+import UserContext from './UserContext.js';
 
 
 
@@ -105,11 +106,13 @@ export default class GreetingsParent extends React.Component {
     return (
       <div>
         <h1>Lyrics to Live By</h1>
-        <Register user={user} onUserChange={this.onUserChange}/>
-        <LyricPostAdd user={user} createLyricPost={this.createLyricPost} />
-        <br />
-        <h3>Previous added lyrics:</h3>
-        <AllLyricPosts lyricpostsList={this.state.lyricpostsList} updateLyricPost={this.updateLyricPost} deleteLyricPost={this.deleteLyricPost}/>
+        <UserContext.Provider value={user}>
+          <Register user={user} onUserChange={this.onUserChange}/>
+          <LyricPostAdd user={user} createLyricPost={this.createLyricPost} />
+          <br />
+          <h3>Previous added lyrics:</h3>
+          <AllLyricPosts lyricpostsList={this.state.lyricpostsList} updateLyricPost={this.updateLyricPost} deleteLyricPost={this.deleteLyricPost}/>
+        </UserContext.Provider>
       </div>
     );
   }

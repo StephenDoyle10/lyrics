@@ -1,7 +1,7 @@
 import React from "react";
+import UserContext from './UserContext.js';
 
 class ASingleLyricPost extends React.Component {
-  
   constructor(props) {
     super(props);
     const { lyric, song, artist, user } = this.props.lyricpost;
@@ -29,42 +29,54 @@ class ASingleLyricPost extends React.Component {
       });
     }
   }
-  async handleSubmit(e){
+  async handleSubmit(e) {
     e.preventDefault();
-    
+
     const form = document.forms.updateLyricPost;
-    
+
     const changes = {
-      lyric:form.lyric.value,
-      song:form.song.value,
-      artist:form.artist.value,
-      user:form.user.value
-    }
+      lyric: form.lyric.value,
+      song: form.song.value,
+      artist: form.artist.value,
+      user: form.user.value,
+    };
     const id = this.props.lyricpost.id;
     this.props.updateLyricPost(id, changes);
     this.toggleEditForm();
-
-
   }
 
   render() {
     const { lyricpost } = this.props;
+    const user = this.context;
     return (
       <div>
         <p className="lyricPostData">
-          '{lyricpost.lyric}'<br/><br/>
-          <span className="songName">{lyricpost.song}</span> by {lyricpost.artist}<br/><br/>
-          - posted by {lyricpost.user}
+          '{lyricpost.lyric}'<br />
+          <br />
+          <span className="songName">{lyricpost.song}</span> by{" "}
+          {lyricpost.artist}
+          <br />
+          <br />- posted by {lyricpost.user}
         </p>
 
-        {/* In this if statement, edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
-        this.state.inputLinkClicked ? (
-          <div></div>
-        ) : (
-          <button onClick={this.toggleEditForm}>Edit</button>
-        )}
+        {
+          /* In this if statement, edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
+          this.state.inputLinkClicked ? (
+            <div></div>
+          ) : (
+            <button onClick={this.toggleEditForm}>Edit</button>
+          )
+        }
 
-        <button type="button" onClick={() => { this.props.deleteLyricPost(lyricpost.id); }}>Delete</button>
+        <button
+          type="button"
+          hidden={!user.signedIn}
+          onClick={() => {
+            this.props.deleteLyricPost(lyricpost.id);
+          }}
+        >
+          Delete
+        </button>
 
         <br />
         {this.state.inputLinkClicked ? (
@@ -116,12 +128,22 @@ class ASingleLyricPost extends React.Component {
   }
 }
 
+ASingleLyricPost.contextType = UserContext;
+
 export default class AllLyricPosts extends React.Component {
   render() {
     //key is needed below, when creating a list in the UI from an array with JSX, you should add a key prop to each child and to any of its’ children.
-    const allLyricPosts = this.props.lyricpostsList.map((i) => (
-      <ASingleLyricPost key={i._id} lyricpost={i} updateLyricPost={this.props.updateLyricPost} deleteLyricPost={this.props.deleteLyricPost}/>
-    ));
+    const allLyricPosts = this.props.lyricpostsList
+      .slice(0)
+      .reverse()
+      .map((i) => (
+        <ASingleLyricPost
+          key={i._id}
+          lyricpost={i}
+          updateLyricPost={this.props.updateLyricPost}
+          deleteLyricPost={this.props.deleteLyricPost}
+        />
+      ));
     return <div>{allLyricPosts}</div>;
   }
 }
