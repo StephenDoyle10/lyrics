@@ -50,83 +50,98 @@ class ASingleLyricPost extends React.Component {
   render() {
     const { lyricpost } = this.props;
     const user = this.context;
-    return (
-      <div>
-        <p className="lyricPostData">
-          '{lyricpost.lyric}'<br />
-          <br />
-          <span className="songName">{lyricpost.song}</span> by{" "}
-          {lyricpost.artist}
-          <br />
-          <br />- posted by {lyricpost.user}
-        </p>
+    const moderatorEmail="spreaddoyle@gmail.com"
 
-        {
-          /* In this if statement, edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
-          this.state.inputLinkClicked ? (
-            <div></div>
+    if (user.email == lyricpost.email||user.email==moderatorEmail) {
+      return (
+        <div>
+          <p className="lyricPostData">
+            '{lyricpost.lyric}'<br />
+            <br />
+            <span className="songName">{lyricpost.song}</span> by{" "}
+            {lyricpost.artist}
+            <br />
+            <br />- posted by {lyricpost.user}
+          </p>
+
+          {
+            /* In this 'if statement', edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
+            this.state.inputLinkClicked ? (
+              <div></div>
+            ) : (
+              <button
+                onClick={this.toggleEditForm}
+              >
+                Edit
+              </button>
+            )
+          }
+
+          <button
+            type="button"
+            onClick={() => {
+              this.props.deleteLyricPost(lyricpost.id);
+            }}
+          >
+            Delete
+          </button>
+
+          <br />
+          {this.state.inputLinkClicked ? (
+            <form name="updateLyricPost" onSubmit={this.handleSubmit}>
+              <textarea
+                type="text"
+                name="lyric"
+                value={this.state.lyric}
+                onChange={(e) => this.setState({ lyric: e.target.value })}
+                rows="4"
+                cols="40"
+              />
+              <br />
+              <input
+                type="text"
+                name="song"
+                value={this.state.song}
+                onChange={(e) => this.setState({ song: e.target.value })}
+                size="40"
+              />
+              <br />
+              <br />
+              <input
+                type="text"
+                name="artist"
+                value={this.state.artist}
+                onChange={(e) => this.setState({ artist: e.target.value })}
+                size="40"
+              />
+              <button type="submit">Submit changes</button>
+              <button type="button" onClick={this.toggleEditForm}>
+                Cancel
+              </button>
+            </form>
           ) : (
-            <button onClick={this.toggleEditForm}>Edit</button>
-          )
-        }
-
-        <button
-          type="button"
-          hidden={!user.signedIn}
-          onClick={() => {
-            this.props.deleteLyricPost(lyricpost.id);
-          }}
-        >
-          Delete
-        </button>
-
-        <br />
-        {this.state.inputLinkClicked ? (
-          <form name="updateLyricPost" onSubmit={this.handleSubmit}>
-            <textarea
-              type="text"
-              name="lyric"
-              value={this.state.lyric}
-              onChange={(e) => this.setState({ lyric: e.target.value })}
-              rows="4"
-              cols="40"
-            />
+            <div></div>
+          )}
+          <br />
+          <hr />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p className="lyricPostData">
+            '{lyricpost.lyric}'<br />
             <br />
-            <input
-              type="text"
-              name="song"
-              value={this.state.song}
-              onChange={(e) => this.setState({ song: e.target.value })}
-              size="40"
-            />
+            <span className="songName">{lyricpost.song}</span> by{" "}
+            {lyricpost.artist}
             <br />
-            <br />
-            <input
-              type="text"
-              name="artist"
-              value={this.state.artist}
-              onChange={(e) => this.setState({ artist: e.target.value })}
-              size="40"
-            />
-            <br />
-            <input
-              type="text"
-              name="user"
-              value={this.state.givenName}
-              onChange={(e) => this.setState({ user: e.target.value })}
-              size="40"
-            />
-            <button type="submit">Submit changes</button>
-            <button type="button" onClick={this.toggleEditForm}>
-              Cancel
-            </button>
-          </form>
-        ) : (
-          <div></div>
-        )}
-        <br />
-      </div>
-    );
+            <br />- posted by {lyricpost.user}
+          </p>
+          <br />
+          <hr />
+        </div>
+      );
+    }
   }
 }
 

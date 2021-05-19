@@ -1,5 +1,6 @@
 import React from "react";
 import signInButton from "./images/signinbutton.png";
+import UserContext from "./UserContext.js";
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -63,7 +64,7 @@ export default class Register extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const user = this.context;
     if (user.signedIn) {
       return (
         <>
@@ -85,3 +86,4 @@ export default class Register extends React.Component {
   }
 }
 
+Register.contextType = UserContext;
