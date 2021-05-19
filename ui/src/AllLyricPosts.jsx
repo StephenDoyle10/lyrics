@@ -32,10 +32,7 @@ class ASingleLyricPost extends React.Component {
   }
   async handleSubmit(e) {
     e.preventDefault();
-    const user = this.context;
     const form = document.forms.updateLyricPost;
-    console.log(this.state.givenName);
-    console.log(this.state.email);
     const changes = {
       lyric: form.lyric.value,
       song: form.song.value,
@@ -158,8 +155,6 @@ export default class AllLyricPosts extends React.Component {
           lyricpost={i}
           updateLyricPost={this.props.updateLyricPost}
           deleteLyricPost={this.props.deleteLyricPost}
-          user={this.props.user}
-          onUserChange={this.props.onUserChange}
         />
       ));
     return <div>{allLyricPosts}</div>;

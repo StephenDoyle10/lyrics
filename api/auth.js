@@ -60,14 +60,13 @@ routes.post("/signin", async (req, res) => {
   };
   const token = jwt.sign(credentials, JWT_SECRET);
   res.cookie("jwt", token, {
-    httpOnly: true,
-    domain: process.env.COOKIE_DOMAIN,
+    httpOnly: true
   });
   res.json(credentials);
 });
 
 routes.post("/signout", async (req, res) => {
-  res.clearCookie("jwt", { httpOnly: true, domain: process.env.COOKIE_DOMAIN });
+  res.clearCookie("jwt", { httpOnly: true });
   res.json({ status: "ok" });
 });
 

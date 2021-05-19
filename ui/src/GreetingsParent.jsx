@@ -18,23 +18,20 @@ export default class GreetingsParent extends React.Component {
     this.updateLyricPost = this.updateLyricPost.bind(this);
     this.deleteLyricPost = this.deleteLyricPost.bind(this);
     this.createUser = this.createUser.bind(this);
-    this.uRLEndpoint = window.ENV.UI_API_ENDPOINT; 
+    this.uRLEndpoint = window.ENV.UI_API_ENDPOINT;
   }
 
   async componentDidMount() {
     
-    const apiEndpoint = this.uRLEndpoint;
+    const apiEndpoint = window.ENV.UI_AUTH_ENDPOINT;
     const response = await fetch(`${apiEndpoint}/user`, {
       method: 'POST',
       credentials: 'include',
     });
     const body = await response.text();
     const result = JSON.parse(body);
-    
     const { signedIn, givenName, email} = result;
-    
     this.setState({ user: { signedIn, givenName, email} });
-    
     this.loadData();
   }
 
@@ -172,4 +169,3 @@ export default class GreetingsParent extends React.Component {
     );
   }
 }
-

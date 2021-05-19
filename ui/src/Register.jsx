@@ -1,23 +1,21 @@
 import React from "react";
+import signInButton from "./images/signinbutton.png";
 import UserContext from "./UserContext.js";
 
 export default class Register extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showing: false,
-      disabled: true,
-    };
     this.signIn = this.signIn.bind(this);
     this.signOut = this.signOut.bind(this);
   }
 
   componentDidMount() {
     const clientId = window.ENV.GOOGLE_CLIENT_ID;
-
+    if (!clientId) return;
     window.gapi.load("auth2", () => {
       if (!window.gapi.auth2.getAuthInstance()) {
         //this line initialises the Google library, which is needed in the following signin function
+        
         window.gapi.auth2.init({ client_id: clientId });
       }
     });
@@ -84,10 +82,7 @@ export default class Register extends React.Component {
       return (
         <div>
           <button onClick={this.signIn}>
-            <img
-              src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png"
-              alt="Sign in"
-            />
+            <img src={signInButton} alt="Sign in" />
           </button>
         </div>
       );
@@ -96,4 +91,3 @@ export default class Register extends React.Component {
 }
 
 Register.contextType = UserContext;
-

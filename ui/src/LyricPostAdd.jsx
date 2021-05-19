@@ -62,7 +62,7 @@ export default class LyricPostAdd extends React.Component {
             disabled
             type="text"
             name="lyric"
-            placeholder="Lyric...but sign in first!"
+            placeholder="lyric...but sign in first!"
             rows="4"
             cols="40"
           />
