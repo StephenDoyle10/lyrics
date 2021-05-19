@@ -4,13 +4,14 @@ import UserContext from './UserContext.js';
 class ASingleLyricPost extends React.Component {
   constructor(props) {
     super(props);
-    const { lyric, song, artist, user } = this.props.lyricpost;
+    const { lyric, song, artist, user:givenName, email } = this.props.lyricpost;
 
     this.state = {
       lyric,
       song,
       artist,
-      user,
+      givenName,
+      email,
       inputLinkClicked: false,
     };
     this.toggleEditForm = this.toggleEditForm.bind(this);
@@ -38,7 +39,8 @@ class ASingleLyricPost extends React.Component {
       lyric: form.lyric.value,
       song: form.song.value,
       artist: form.artist.value,
-      user: form.user.value,
+      user: this.state.givenName,
+      email: this.state.email,
     };
     const id = this.props.lyricpost.id;
     this.props.updateLyricPost(id, changes);
@@ -110,7 +112,7 @@ class ASingleLyricPost extends React.Component {
             <input
               type="text"
               name="user"
-              value={this.state.user}
+              value={this.state.givenName}
               onChange={(e) => this.setState({ user: e.target.value })}
               size="40"
             />

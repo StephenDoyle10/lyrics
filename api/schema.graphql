@@ -21,6 +21,7 @@ type LyricPost{
     song: String!
     artist: String!
     user: String!
+    email:String!
 }
 
 
@@ -29,5 +30,6 @@ input LyricPostInputs {
     song: String!
     artist: String!
     user: String!
+    email: String!
 }
 

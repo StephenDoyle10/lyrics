@@ -27,7 +27,7 @@ export default class Register extends React.Component {
       const googleUser = await auth2.signIn();
       googleToken = googleUser.getAuthResponse().id_token;
     } catch (error) {
-      showError(`Error authenticating with Google: ${error.error}`);
+      alert(`Error authenticating with Google: ${error.error}`);
     }
     try {
       const apiEndpoint = window.ENV.UI_AUTH_ENDPOINT;
@@ -43,13 +43,12 @@ export default class Register extends React.Component {
       const { onUserChange } = this.props;
       onUserChange({ signedIn, givenName, email });
     } catch (error) {
-      showError(`Error signing into the app: ${error}`);
+      alert(`Error signing into the app: ${error}`);
     }
   }
 
   async signOut() {
     const apiEndpoint = window.ENV.UI_AUTH_ENDPOINT;
-    const { showError } = this.props;
     try {
       await fetch(`${apiEndpoint}/signout`, {
         method: "POST",
@@ -59,7 +58,7 @@ export default class Register extends React.Component {
       const { onUserChange } = this.props;
       onUserChange({ signedIn: false, givenName: "", email:""});
     } catch (error) {
-      showError(`Error signing out: ${error}`);
+      alert(`Error signing out: ${error}`);
     }
   }
 

@@ -44,7 +44,7 @@ export default class GreetingsParent extends React.Component {
   //about GraphQL queries: A query is sent to the server that precisely describes its data needs. The server resolves that query and returns only the data the client asked for.
   async loadData() {
     const query = `query{lyricpostsList{
-      _id id lyric song artist user
+      _id id lyric song artist user email
     }}`;
     const response = await fetch(this.uRLEndpoint, {
       method: "POST",
@@ -53,7 +53,6 @@ export default class GreetingsParent extends React.Component {
     });
     
     const result = await response.json();
-    
     this.setState({ lyricpostsList: result.data.lyricpostsList });
   }
 
