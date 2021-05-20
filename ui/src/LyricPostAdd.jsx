@@ -1,5 +1,6 @@
 import React from "react";
 import UserContext from './UserContext.js';
+import { Button } from 'react-bootstrap';
 
 export default class LyricPostAdd extends React.Component {
   constructor() {
@@ -47,7 +48,7 @@ export default class LyricPostAdd extends React.Component {
           <br />
           <input type="text" name="artist" placeholder="artist" />
           <br/>
-          <button>Submit</button>
+          <Button bsStyle="primary" type="button">Submit</Button>
         </form>
       </div>
     )}
@@ -71,7 +72,7 @@ export default class LyricPostAdd extends React.Component {
           <br />
           <input disabled type="text" name="artist" placeholder="artist"/>
           <br/>
-          <button disabled>Submit</button>
+          <Button bsStyle="default" type="button" disabled>Submit</Button>
         </form>
       </div>
       )

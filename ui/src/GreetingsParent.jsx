@@ -3,6 +3,7 @@ import LyricPostAdd from "./LyricPostAdd.jsx";
 import AllLyricPosts from "./AllLyricPosts.jsx";
 import Register from "./Register.jsx";
 import UserContext from './UserContext.js';
+import { Panel } from 'react-bootstrap';
 
 import "./App.css";
 
@@ -147,15 +148,20 @@ export default class GreetingsParent extends React.Component {
     const { user } = this.state;
     return (
       <div>
-        <h1>Lyrics to Live By</h1>
         <UserContext.Provider value={user}>
-          <Register
+          <br/>
+        <Register
             onUserChange = {this.onUserChange}
             createUser={this.createUser} />
+            <br/>
+            <br/>
+        <Panel><Panel.Heading><Panel.Title><h1>Lyrics to Live By</h1></Panel.Title></Panel.Heading>
         
-          <LyricPostAdd 
-            createLyricPost={this.createLyricPost} />
+          
         
+          <Panel.Body><LyricPostAdd 
+            createLyricPost={this.createLyricPost} /></Panel.Body>
+        </Panel>
           <br />
           <h3>Previously added lyrics:</h3>
           <AllLyricPosts

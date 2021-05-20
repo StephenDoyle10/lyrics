@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import 'babel-polyfill';
 import 'whatwg-fetch';
 import GreetingsParent from './GreetingsParent.jsx';
+import { Grid } from 'react-bootstrap';
 
 const element = (
-    
-        <GreetingsParent/>
+        <Grid fluid>
+                <GreetingsParent/>
+        </Grid>
     
 );
 

@@ -1,10 +1,18 @@
 import React from "react";
 import UserContext from "./UserContext.js";
+import { Button, Glyphicon, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Panel } from "react-bootstrap";
 
 class ASingleLyricPost extends React.Component {
   constructor(props) {
     super(props);
-    const { lyric, song, artist, user:givenName, email } = this.props.lyricpost;
+    const {
+      lyric,
+      song,
+      artist,
+      user: givenName,
+      email,
+    } = this.props.lyricpost;
 
     this.state = {
       lyric,
@@ -48,96 +56,91 @@ class ASingleLyricPost extends React.Component {
   render() {
     const { lyricpost } = this.props;
     const user = this.context;
-    const moderatorEmail="spreaddoyle@gmail.com"
+    const moderatorEmail = "spreaddoyle@gmail.com";
+    const deleteTooltip = (
+      <Tooltip id="delete-tooltip" placement="top">
+        Delete post
+      </Tooltip>
+    );
+    const lyricpostBody = (
+      <p className="lyricPostData">
+        <span className="songName">{lyricpost.song}</span> by {lyricpost.artist}
+        <br />
+        <br />'{lyricpost.lyric}'<br />
+        <br />- posted by {lyricpost.user}
+      </p>
+    );
 
-    if (user.email == lyricpost.email||user.email==moderatorEmail) {
+    if (user.email == lyricpost.email || user.email == moderatorEmail) {
       return (
-        <div>
-          <p className="lyricPostData">
-            '{lyricpost.lyric}'<br />
-            <br />
-            <span className="songName">{lyricpost.song}</span> by{" "}
-            {lyricpost.artist}
-            <br />
-            <br />- posted by {lyricpost.user}
-          </p>
+        <Panel>
+          <Panel.Body>
+            {lyricpostBody}
 
-          {
-            /* In this 'if statement', edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
-            this.state.inputLinkClicked ? (
-              <div></div>
-            ) : (
-              <button
-                onClick={this.toggleEditForm}
+            {
+              /* In this 'if statement', edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
+              this.state.inputLinkClicked ? (
+                <div></div>
+              ) : (
+                <button onClick={this.toggleEditForm}>Edit</button>
+              )
+            }
+
+            <OverlayTrigger delayShow={500} overlay={deleteTooltip}>
+              <Button
+                bsSize="xsmall"
+                onClick={() => {
+                  this.props.deleteLyricPost(lyricpost.id);
+                }}
               >
-                Edit
-              </button>
-            )
-          }
+                <Glyphicon glyph="trash" />
+              </Button>
+            </OverlayTrigger>
 
-          <button
-            type="button"
-            onClick={() => {
-              this.props.deleteLyricPost(lyricpost.id);
-            }}
-          >
-            Delete
-          </button>
-
-          <br />
-          {this.state.inputLinkClicked ? (
-            <form name="updateLyricPost" onSubmit={this.handleSubmit}>
-              <textarea
-                type="text"
-                name="lyric"
-                value={this.state.lyric}
-                onChange={(e) => this.setState({ lyric: e.target.value })}
-                rows="4"
-                cols="40"
-              />
-              <br />
-              <input
-                type="text"
-                name="song"
-                value={this.state.song}
-                onChange={(e) => this.setState({ song: e.target.value })}
-                size="40"
-              />
-              <br />
-              <br />
-              <input
-                type="text"
-                name="artist"
-                value={this.state.artist}
-                onChange={(e) => this.setState({ artist: e.target.value })}
-                size="40"
-              />
-              <button type="submit">Submit changes</button>
-              <button type="button" onClick={this.toggleEditForm}>
-                Cancel
-              </button>
-            </form>
-          ) : (
-            <div></div>
-          )}
-          <br />
-          <hr />
-        </div>
+            <br />
+            {this.state.inputLinkClicked ? (
+              <form name="updateLyricPost" onSubmit={this.handleSubmit}>
+                <textarea
+                  type="text"
+                  name="lyric"
+                  value={this.state.lyric}
+                  onChange={(e) => this.setState({ lyric: e.target.value })}
+                  rows="4"
+                  cols="40"
+                />
+                <br />
+                <input
+                  type="text"
+                  name="song"
+                  value={this.state.song}
+                  onChange={(e) => this.setState({ song: e.target.value })}
+                  size="40"
+                />
+                <br />
+                <br />
+                <input
+                  type="text"
+                  name="artist"
+                  value={this.state.artist}
+                  onChange={(e) => this.setState({ artist: e.target.value })}
+                  size="40"
+                />
+                <button type="submit">Submit changes</button>
+                <button type="button" onClick={this.toggleEditForm}>
+                  Cancel
+                </button>
+              </form>
+            ) : (
+              <div></div>
+            )}
+          </Panel.Body>
+        </Panel>
       );
     } else {
       return (
-        <div>
-          <p className="lyricPostData">
-            '{lyricpost.lyric}'<br />
-            <br />
-            <span className="songName">{lyricpost.song}</span> by{" "}
-            {lyricpost.artist}
-            <br />
-            <br />- posted by {lyricpost.user}
-          </p>
-          <br />
-          <hr />
-        </div>
+        <Panel>
+          <Panel.Body>{lyricpostBody}</Panel.Body>
+        </Panel>
       );
     }
   }

@@ -1,4 +1,12 @@
-h1{color:red;}
+h1{
+    font-family: 'Lobster', cursive;
+font-family: 'Shrikhand', cursive;
+color: #fec89a
+}
+
+body{
+    background-color:#f8edeb
+}
 
 .lyricPostData{
     white-space:pre-wrap
