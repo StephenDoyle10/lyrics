@@ -1,6 +1,6 @@
 import React from "react";
 import UserContext from './UserContext.js';
-import { Button } from 'react-bootstrap';
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default class LyricPostAdd extends React.Component {
   constructor() {
@@ -36,44 +36,55 @@ export default class LyricPostAdd extends React.Component {
         {/*onSubmit or onClick take a function as a value, which tells the program what to do when the action is taken:*/}
         
         <form name="lyricPostAdd" onSubmit={this.handleSubmit}>
-          <textarea
-            type="text"
+          <FormGroup>
+            <ControlLabel>Lyric:</ControlLabel>
+          <FormControl
+            componentClass="textarea"
             name="lyric"
-            placeholder="lyric"
-            rows="4"
-            cols="40"
+            placeholder="Enter lyric"
+            rows={4}
           />
           <br />
-          <input type="text" name="song" placeholder="song" />
+          <ControlLabel>Song name:</ControlLabel>
+          <FormControl type="text" name="song" placeholder="Enter song name" />
           <br />
-          <input type="text" name="artist" placeholder="artist" />
+          <ControlLabel>Enter artist:</ControlLabel>
+          <FormControl type="text" name="artist" placeholder="Artist" />
           <br/>
-          <Button bsStyle="primary" type="button">Submit</Button>
+          </FormGroup>
+          <Button bsStyle="primary" type="submit">Submit</Button>
+          
         </form>
       </div>
     )}
     else{
       return(
         <div>
-        <h3>Been inspired by some lyrics recently? Share the wealth!</h3>
+        <h3>Been inspired by some lyrics recently? Share the wealth! Sign in to start posting.</h3>
         {/*onSubmit or onClick take a function as a value, which tells the program what to do when the action is taken:*/}
         
-        <form>
-          <textarea
+        <form name="lyricPostAdd" onSubmit={this.handleSubmit}>
+          <FormGroup>
+            <ControlLabel>Lyric:</ControlLabel>
+          <FormControl
             disabled
-            type="text"
+            componentClass="textarea"
             name="lyric"
-            placeholder="lyric...but sign in first!"
-            rows="4"
-            cols="40"
+            placeholder="Enter lyric...but you must sign in first!"
+            rows={4}
           />
           <br />
-          <input disabled type="text" name="song" placeholder="song"/>
+          <ControlLabel>Song name:</ControlLabel>
+          <FormControl disabled type="text" name="song" placeholder="Enter song name" />
           <br />
-          <input disabled type="text" name="artist" placeholder="artist"/>
+          <ControlLabel>Enter artist:</ControlLabel>
+          <FormControl disabled type="text" name="artist" placeholder="Artist" />
           <br/>
-          <Button bsStyle="default" type="button" disabled>Submit</Button>
+          </FormGroup>
+          <Button disabled bsStyle="primary" type="submit">Submit</Button>
+          
         </form>
+        
       </div>
       )
     }

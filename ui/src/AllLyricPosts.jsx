@@ -1,7 +1,7 @@
 import React from "react";
 import UserContext from "./UserContext.js";
 import { Button, Glyphicon, Tooltip, OverlayTrigger } from "react-bootstrap";
-import { Panel } from "react-bootstrap";
+import { Panel, FormGroup, FormControl, ButtonToolbar } from "react-bootstrap";
 
 class ASingleLyricPost extends React.Component {
   constructor(props) {
@@ -79,16 +79,24 @@ class ASingleLyricPost extends React.Component {
 
             {
               /* In this 'if statement', edit forms are hidden from user if inputLinkClicked is set to false. If set to true (for example, by clicking on the edit button and activating the toggleEditForm function), then the edit forms appear */
-              this.state.inputLinkClicked ? (
-                <div></div>
-              ) : (
-                <button onClick={this.toggleEditForm}>Edit</button>
-              )
-            }
-
-            <OverlayTrigger delayShow={500} overlay={deleteTooltip}>
+              !this.state.inputLinkClicked ? (
+                <ButtonToolbar>
+                <Button onClick={this.toggleEditForm}>Edit</Button>
+                <OverlayTrigger delayShow={500} overlay={deleteTooltip}>
               <Button
-                bsSize="xsmall"
+                bsSize="small"
+                onClick={() => {
+                  this.props.deleteLyricPost(lyricpost.id);
+                }}
+              >
+                <Glyphicon glyph="trash" />
+              </Button>
+            </OverlayTrigger>
+            </ButtonToolbar>
+              ) : (
+                <OverlayTrigger delayShow={500} overlay={deleteTooltip}>
+              <Button
+                bsSize="small"
                 onClick={() => {
                   this.props.deleteLyricPost(lyricpost.id);
                 }}
@@ -97,38 +105,46 @@ class ASingleLyricPost extends React.Component {
               </Button>
             </OverlayTrigger>
 
+
+              )
+            }
+
+            
+
             <br />
             {this.state.inputLinkClicked ? (
               <form name="updateLyricPost" onSubmit={this.handleSubmit}>
-                <textarea
-                  type="text"
-                  name="lyric"
-                  value={this.state.lyric}
-                  onChange={(e) => this.setState({ lyric: e.target.value })}
-                  rows="4"
-                  cols="40"
-                />
-                <br />
-                <input
-                  type="text"
-                  name="song"
-                  value={this.state.song}
-                  onChange={(e) => this.setState({ song: e.target.value })}
-                  size="40"
-                />
-                <br />
-                <br />
-                <input
-                  type="text"
-                  name="artist"
-                  value={this.state.artist}
-                  onChange={(e) => this.setState({ artist: e.target.value })}
-                  size="40"
-                />
-                <button type="submit">Submit changes</button>
-                <button type="button" onClick={this.toggleEditForm}>
-                  Cancel
-                </button>
+                <br/>
+                <FormGroup>
+                  <FormControl
+                    componentClass="textarea"
+                    name="lyric"
+                    value={this.state.lyric}
+                    onChange={(e) => this.setState({ lyric: e.target.value })}
+                    rows={4}
+                  />
+                  <br />
+                  <FormControl
+                    type="text"
+                    name="song"
+                    value={this.state.song}
+                    onChange={(e) => this.setState({ song: e.target.value })}
+                  />
+
+                  <br />
+                  <FormControl
+                    type="text"
+                    name="artist"
+                    value={this.state.artist}
+                    onChange={(e) => this.setState({ artist: e.target.value })}
+                  />
+                </FormGroup>
+                <ButtonToolbar>
+                  <Button type="submit">Submit changes</Button>
+                  <Button type="button" onClick={this.toggleEditForm}>
+                    Cancel
+                  </Button>
+                </ButtonToolbar>
               </form>
             ) : (
               <div></div>

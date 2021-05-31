@@ -150,18 +150,19 @@ export default class GreetingsParent extends React.Component {
       <div>
         <UserContext.Provider value={user}>
           <br/>
+          <Panel.Title><h1>Lyrics to Live By</h1></Panel.Title>
+          <br/>
         <Register
             onUserChange = {this.onUserChange}
             createUser={this.createUser} />
             <br/>
-            <br/>
-        <Panel><Panel.Heading><Panel.Title><h1>Lyrics to Live By</h1></Panel.Title></Panel.Heading>
+        
         
           
         
-          <Panel.Body><LyricPostAdd 
-            createLyricPost={this.createLyricPost} /></Panel.Body>
-        </Panel>
+          <LyricPostAdd 
+            createLyricPost={this.createLyricPost} />
+        
           <br />
           <h3>Previously added lyrics:</h3>
           <AllLyricPosts

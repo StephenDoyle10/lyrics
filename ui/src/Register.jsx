@@ -81,8 +81,8 @@ export default class Register extends React.Component {
     } else {
       return (
         <div>
-          <button onClick={this.signIn}>
-            <img src={signInButton} alt="Sign in" />
+          <button className="button1" onClick={this.signIn}>
+            <img className='signInButton' src={signInButton} alt="Sign in" />
           </button>
         </div>
       );
